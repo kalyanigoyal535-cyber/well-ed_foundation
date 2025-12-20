@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import AOS from 'aos'
+import Donate from './components/Donate'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -201,15 +202,19 @@ function App() {
                 Get Involved
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
               </a>
+              <a href="#donate" className="text-gray-700 hover:text-green-600 transition-all duration-300 font-medium relative group">
+                Donate
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
+              </a>
             </div>
 
             <div className="hidden md:flex space-x-4">
               <a href="#contact" className="px-6 py-2.5 text-green-600 font-semibold hover:bg-green-50 rounded-xl transition-all duration-300 hover:shadow-md">
                 Contact Us
               </a>
-              <button className="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              <a href="#donate" className="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Donate Now
-              </button>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -237,13 +242,14 @@ function App() {
               <a href="#impact" className="block text-gray-700 hover:text-green-600 font-medium">Impact</a>
               <a href="#stories" className="block text-gray-700 hover:text-green-600 font-medium">Stories</a>
               <a href="#get-involved" className="block text-gray-700 hover:text-green-600 font-medium">Get Involved</a>
+              <a href="#donate" className="block text-gray-700 hover:text-green-600 font-medium">Donate</a>
               <div className="pt-4 space-y-2">
                 <a href="#contact" className="block w-full px-6 py-2 text-green-600 font-semibold hover:bg-green-50 rounded-lg transition-colors text-center">
                   Contact Us
                 </a>
-                <button className="w-full px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
+                <a href="#donate" className="block w-full px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 text-center">
                   Donate Now
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -269,9 +275,9 @@ function App() {
               <button className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Know More
               </button>
-              <button className="px-8 py-3 bg-white text-green-600 font-semibold rounded-lg border-2 border-green-600 hover:bg-green-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+              <a href="#donate" className="px-8 py-3 bg-white text-green-600 font-semibold rounded-lg border-2 border-green-600 hover:bg-green-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300">
                 Donate Now
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -889,9 +895,9 @@ function App() {
               Join us in creating lasting change. Your support can transform lives and build stronger communities.
             </p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center" data-aos="fade-up" data-aos-delay="200">
-                <button className="px-10 py-4 bg-white text-green-600 text-lg font-bold rounded-xl hover:bg-gray-100 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <a href="#donate" className="px-10 py-4 bg-white text-green-600 text-lg font-bold rounded-xl hover:bg-gray-100 hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                   Donate Now
-                </button>
+                </a>
                 <button className="px-10 py-4 bg-white/20 backdrop-blur-xl text-white text-lg font-semibold rounded-xl border-2 border-white/50 hover:bg-white/30 hover:border-white transform hover:scale-105 transition-all duration-300">
                 Volunteer
               </button>
@@ -917,6 +923,9 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Donate Section */}
+      <Donate />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-16 relative overflow-hidden" data-aos="fade-up">
