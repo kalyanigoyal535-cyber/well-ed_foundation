@@ -1,0 +1,12 @@
+# robots.txt for Welled Foundation
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://well-ed-foundation.vercel.app/sitemap.xml
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
