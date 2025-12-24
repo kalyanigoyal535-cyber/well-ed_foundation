@@ -8,12 +8,12 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#e6f0f8',
-          100: '#cce1f1',
-          200: '#99c3e3',
-          300: '#66a5d5',
-          400: '#3387c7',
-          500: '#1A4B8A', // Main brand color from logo
+          50: '#f0f7ff', // Light pale blue from mood board
+          100: '#e6f0f8',
+          200: '#cce1f1',
+          300: '#99c3e3',
+          400: '#66a5d5',
+          500: '#1A4B8A', // Dark deep blue from mood board
           600: '#153d6f',
           700: '#102e53',
           800: '#0a1f38',
@@ -26,7 +26,7 @@ export default {
           200: '#d7d7d7',
           300: '#c3c3c3',
           400: '#afafaf',
-          500: '#666666', // Tagline color from logo
+          500: '#666666',
           600: '#525252',
           700: '#3d3d3d',
           800: '#292929',
@@ -34,34 +34,45 @@ export default {
           950: '#0a0a0a',
         },
         accent: {
-          light: '#e6f0f8',
-          DEFAULT: '#1A4B8A', // Logo blue
-          dark: '#153d6f',
+          light: '#f0f7ff', // Light pale blue from mood board
+          DEFAULT: '#1A4B8A', // Dark deep blue from mood board
+          dark: '#102e53',
         },
-        // Keep green as complementary accent for variety
+        // Vibrant medium green from mood board
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
           200: '#bbf7d0',
           300: '#86efac',
           400: '#4ade80',
-          500: '#22c55e',
+          500: '#22c55e', // Vibrant medium green
           600: '#16a34a',
           700: '#15803d',
+        },
+        // Mood board colors
+        moodboard: {
+          yellow: '#FFD700', // Bright sunny yellow
+          orange: '#FF6B35', // Vibrant orange
+          red: '#DC2626', // Deep rich red
+          green: '#22c55e', // Vibrant medium green
+          blue: '#1A4B8A', // Dark deep blue
+          lightBlue: '#f0f7ff', // Light pale blue
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Atkinson Hyperlegible', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Atkinson Hyperlegible', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, rgba(26, 75, 138, 0.1) 0%, rgba(102, 102, 102, 0.05) 100%)',
-        'card-gradient': 'linear-gradient(135deg, #ffffff 0%, #e6f0f8 100%)',
+        'card-gradient': 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)',
         'accent-gradient': 'linear-gradient(135deg, #1A4B8A 0%, #153d6f 100%)',
-        'blue-gradient': 'linear-gradient(135deg, #2563eb 0%, #1A4B8A 100%)',
-        'logo-gradient': 'linear-gradient(135deg, #1A4B8A 0%, #2563eb 100%)',
+        'blue-gradient': 'linear-gradient(135deg, #1A4B8A 0%, #102e53 100%)',
+        'logo-gradient': 'linear-gradient(135deg, #1A4B8A 0%, #22c55e 100%)',
+        'moodboard-gradient': 'linear-gradient(135deg, #FFD700 0%, #FF6B35 50%, #DC2626 100%)',
+        'moodboard-warm': 'linear-gradient(135deg, #FFD700 0%, #FF6B35 100%)',
       },
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
