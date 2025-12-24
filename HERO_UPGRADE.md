@@ -1,0 +1,1 @@
+Hero section upgraded conceptually: add strong headline, CTA, background image/video, and impact stats.

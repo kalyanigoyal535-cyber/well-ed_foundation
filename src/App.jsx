@@ -1,13 +1,19 @@
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Donate from './pages/Donate'
+const Home = React.lazy(() => import('./pages/Home'))
+const Donate = React.lazy(() => import('./pages/Donate'))
+import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/donate" element={<Donate />} />
-    </Routes>
+    <ErrorBoundary>
+      <div className="w-full ">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/donate" element={<Donate />} />
+        </Routes>
+      </div>
+    </ErrorBoundary>
   )
 }
 

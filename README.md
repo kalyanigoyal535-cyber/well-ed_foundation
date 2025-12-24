@@ -46,6 +46,3 @@ npm run preview
 - Modern ES6+ JavaScript
 
 
-
-
-
