@@ -63,13 +63,13 @@ function Navigation() {
           <div className="flex items-center flex-shrink-0">
             {/* Great Place To Work Certification Badge */}
             <div className="flex items-center">
-              <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border border-amber-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
+              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border border-amber-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
                 <svg className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-1.5">
-                  <span className="text-[9px] sm:text-xs font-bold text-amber-700 leading-tight whitespace-nowrap">Great Place To Work</span>
-                  <span className="text-[9px] sm:text-xs font-semibold text-amber-600 leading-tight whitespace-nowrap">Certified</span>
+                <div className="flex items-center gap-1 sm:gap-1.5">
+                  <span className="text-[9px] sm:text-xs font-bold text-amber-700 whitespace-nowrap">Great Place To Work</span>
+                  <span className="text-[9px] sm:text-xs font-semibold text-amber-600 whitespace-nowrap">Certified</span>
                 </div>
               </div>
             </div>
