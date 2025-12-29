@@ -323,6 +323,7 @@ import AOS from 'aos'
 import { Link, useLocation } from 'react-router-dom'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
+import OptimizedImage from '../components/OptimizedImage'
 import { STATS, PROGRAMS } from '../constants/data'
 
 function Home() {
@@ -463,13 +464,6 @@ function Home() {
       description: 'Aman had difficulty concentrating in school. Wellness education sessions helped his family understand the role of nutrition and sleep. Simple changes improved his focus and learning ability.',
       image: '/impact-aman.jpg',
       badge: 'STUDENT SUCCESS'
-    },
-    {
-      name: 'Community',
-      title: 'A Community That Started Talking About Health',
-      description: 'In one community, health was rarely discussed. Regular outreach sessions created a safe space for conversation. Slowly, people began asking questions, sharing experiences, and supporting each other\'s well-being.',
-      image: '/impact-community.jpg',
-      badge: 'COMMUNITY TRANSFORMATION'
     }
   ]
   
@@ -1164,23 +1158,44 @@ function Home() {
       </section>
 
 
-      {/* Impact Stories Carousel Section */}
-      <section id="stories" className="pt-4 md:pt-6 pb-8 md:pb-12 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white relative overflow-hidden w-full">
-        {/* Dark overlay background */}
-        <div className="absolute inset-0 bg-black/40"></div>
-        
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%221%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')]"></div>
+      {/* Impact Stories Carousel Section - New Modern Design */}
+      <section id="stories" className="pt-6 md:pt-8 pb-8 md:pb-10 lg:pb-12 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden w-full border-2 border-yellow-400">
+        {/* Subtle Background Elements - Professional NGO Feel */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Soft, Gentle Background Blobs */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-100/25 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-50/30 rounded-full blur-3xl"></div>
         </div>
+        
+        {/* Subtle Texture Overlay */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22%231A4B8A%22 fill-opacity=%220.4%22%3E%3Cpath d=%22M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z%22/%3E%3C/g%3E%3C/svg%3E')]"></div>
+        </div>
+        
+        {/* Simple Border Accents */}
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-300/40 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-yellow-300/40 to-transparent"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header */}
-          <div className="text-center mb-4 sm:mb-6 md:mb-8" data-aos="fade-up">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 md:mb-3 text-white">
-              Impact Stories
+          <div className="text-center mb-4 md:mb-6" data-aos="fade-up">
+            <div className="inline-block mb-1">
+              <span className="text-primary-600 text-[10px] sm:text-xs font-bold uppercase tracking-widest">Real Impact</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2">
+              <span className="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 bg-clip-text text-transparent">
+                Impact Stories
+              </span>
             </h2>
-            <div className="w-20 sm:w-24 h-0.5 sm:h-1 bg-green-500 mx-auto rounded-full"></div>
+            <div className="flex items-center justify-center gap-1.5 mb-2">
+              <div className="w-8 h-0.5 bg-gradient-to-r from-transparent to-yellow-400"></div>
+              <div className="w-1 h-1 bg-yellow-400 rounded-full"></div>
+              <div className="w-8 h-0.5 bg-gradient-to-r from-yellow-400 to-transparent"></div>
+            </div>
+            <p className="text-gray-600 text-[10px] sm:text-xs max-w-2xl mx-auto">
+              Real people, real transformations, real impact
+            </p>
           </div>
 
           {/* Carousel */}
@@ -1193,68 +1208,134 @@ function Home() {
             {impactStories.map((story, index) => (
               <div
                 key={index}
-                className={`transition-opacity duration-700 ${
-                  index === currentStory ? 'opacity-100' : 'opacity-0 absolute inset-0 pointer-events-none'
+                className={`transition-all duration-700 ${
+                  index === currentStory 
+                    ? 'opacity-100 scale-100' 
+                    : 'opacity-0 scale-95 absolute inset-0 pointer-events-none'
                 }`}
               >
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6">
-                    {/* Image Section */}
-                    <div className="relative md:col-span-2" data-aos="fade-right" data-aos-delay="200">
-                      <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-yellow-400/20 to-orange-400/20 aspect-[4/3] md:aspect-[4/3]">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center p-3 md:p-4 lg:p-6">
-                            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-yellow-400 mb-1">
-                              {story.name === 'Community' ? 'Community' : story.name.split(' ')[0]}
-                            </div>
-                            <div className="text-white text-[10px] sm:text-xs md:text-sm mb-2">
-                              {story.name === 'Community' ? 'Transforming Lives Through' : 'Transformed Through'}
-                            </div>
-                            <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-yellow-400 mb-3 md:mb-4">{story.badge}</div>
-                            <div className="inline-block px-2 py-1 md:px-3 md:py-1.5 bg-white rounded-lg border-2 border-green-500">
-                              <span className="text-green-600 font-bold text-[10px] sm:text-xs">{story.badge}</span>
-                            </div>
-                          </div>
+                {/* Main Story Card - Creative Design */}
+                <div className="bg-white rounded-xl lg:rounded-2xl shadow-2xl overflow-hidden border border-gray-200 max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-500" data-aos="zoom-in">
+                  {/* Animated Gradient Border */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-yellow-400 to-primary-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10 blur-xl"></div>
+                  
+                  <div className="grid md:grid-cols-5 gap-0 relative">
+                    {/* Left Side - Image with Creative Effects */}
+                    <div className="relative order-1 md:col-span-2 overflow-hidden aspect-square md:aspect-[4/5] group/image">
+                      <OptimizedImage
+                        src={story.image}
+                        alt={`${story.name} - ${story.title}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      
+                      {/* Decorative Corner Accents */}
+                      <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-yellow-400/30 to-transparent"></div>
+                      <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-primary-600/30 to-transparent"></div>
+                      
+                      {/* Floating Badge on Image */}
+                      <div className="absolute top-4 left-4 transform rotate-[-5deg]">
+                        <div className="px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border-2 border-yellow-400">
+                          <span className="text-xs font-black text-primary-700 uppercase tracking-wider">
+                            {story.badge.split(' ')[0]}
+                          </span>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Content Section */}
-                    <div className="flex flex-col justify-center md:col-span-3" data-aos="fade-left" data-aos-delay="300">
-                      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold mb-2 md:mb-3 text-white leading-tight">
-                        {story.name === 'Community' ? story.title : `${story.name}, ${story.title}`}
-                      </h3>
-                      <p className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed">
-                        {story.description}
-                      </p>
+                    {/* Right Side - Content with Creative Styling */}
+                    <div className={`p-4 md:p-5 lg:p-6 flex flex-col justify-center md:col-span-3 relative ${
+                      index % 2 === 0 ? 'order-2' : 'order-1'
+                    }`}>
+                      {/* Decorative Background Pattern */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%231A4B8A%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+                      </div>
+                      
+                      <div className="relative z-10">
+                        {/* Quote Icon */}
+                        <div className="mb-4">
+                          <svg className="w-8 h-8 text-primary-200" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                          </svg>
+                        </div>
+                        
+                        {/* Name & Title */}
+                        <div className="mb-4">
+                          <h4 className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 mb-3 leading-tight">
+                            <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
+                              {story.name}
+                            </span>
+                            <span className="text-gray-700">, {story.title}</span>
+                          </h4>
+                          
+                          {/* Creative Divider */}
+                          <div className="flex items-center gap-2 mb-4">
+                            <div className="h-1 w-12 bg-gradient-to-r from-primary-600 to-yellow-400 rounded-full"></div>
+                            <div className="h-1 w-1 bg-yellow-400 rounded-full"></div>
+                            <div className="h-1 w-8 bg-gradient-to-r from-yellow-400 to-primary-600 rounded-full"></div>
+                          </div>
+                        </div>
+                        
+                        {/* Description */}
+                        <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-5 font-medium">
+                          {story.description}
+                        </p>
+                        
+                        {/* Badge with Creative Design */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-primary-50 to-yellow-50 border-2 border-primary-200 shadow-md hover:shadow-lg transition-shadow duration-300 group/badge">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                          <span className="text-xs font-black text-primary-700 uppercase tracking-widest">
+                            {story.badge}
+                          </span>
+                          <svg className="w-4 h-4 text-primary-600 transform group-hover/badge:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      {/* Decorative Bottom Accent */}
+                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-primary-100/50 to-transparent rounded-tl-full"></div>
                     </div>
                   </div>
+                  
+                  {/* Animated Corner Decorations */}
+                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-              ))}
+              </div>
+            ))}
             
-            {/* Navigation Arrows - Hidden but functional */}
+            {/* Navigation Arrows */}
             <button
               onClick={prevStory}
-              className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 opacity-0 cursor-pointer z-20"
+              className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition-all duration-300 z-20 border border-gray-200 hover:border-primary-300 group"
               aria-label="Previous story"
             >
+              <svg className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
             <button
               onClick={nextStory}
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 opacity-0 cursor-pointer z-20"
+              className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition-all duration-300 z-20 border border-gray-200 hover:border-primary-300 group"
               aria-label="Next story"
             >
+              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
             
             {/* Dots Indicator */}
-            <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-6" data-aos="fade-up" data-aos-delay="400">
+            <div className="flex justify-center gap-2 sm:gap-3 mt-6 md:mt-8" data-aos="fade-up" data-aos-delay="400">
               {impactStories.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToStory(index)}
                   className={`transition-all duration-300 rounded-full ${
                     index === currentStory
-                      ? 'w-8 sm:w-10 h-1.5 sm:h-2 bg-green-500'
-                      : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/30 hover:bg-white/50'
+                      ? 'w-10 sm:w-12 h-3 bg-gradient-to-r from-primary-600 to-yellow-400 shadow-lg'
+                      : 'w-3 h-3 bg-gray-300 hover:bg-primary-400'
                   }`}
                   aria-label={`Go to story ${index + 1}`}
                 />
