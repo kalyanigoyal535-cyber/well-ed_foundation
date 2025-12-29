@@ -9,52 +9,58 @@ export const STATS = [
 
 export const PROGRAMS = [
   {
-    title: 'Education',
-    subtitle: 'Education Empowerment',
-    description: 'Providing quality education, nutrition and holistic development of children in underserved communities.',
+    title: 'Educational Bridge Program',
+    subtitle: 'Academic Support',
+    description: 'Supporting underprivileged students with extra academic help to strengthen learning and confidence beyond school hours.',
     icon: '📚',
-    color: 'bg-blue-600',
-    detail: 'Education, nutrition and holistic development of children'
+    color: 'from-amber-300 to-amber-400',
+    textColor: 'text-amber-600',
+    detail: 'Supporting underprivileged students with extra academic help to strengthen learning and confidence beyond school hours.'
   },
   {
-    title: 'Healthcare',
-    subtitle: 'Healthcare Access',
-    description: 'Taking healthcare services to doorsteps of hard to reach communities through mobile clinics and health camps.',
-    icon: '🏥',
-    color: 'bg-primary-600',
-    detail: 'Taking healthcare services to doorsteps of hard to reach communities'
+    title: 'Digital Literacy & Skills Workshops',
+    subtitle: 'Digital Empowerment',
+    description: 'Helping individuals learn basic computer skills and use digital tools for education, work, and daily life.',
+    icon: '💻',
+    color: 'from-purple-300 to-purple-400',
+    textColor: 'text-purple-600',
+    detail: 'Helping individuals learn basic computer skills and use digital tools for education, work, and daily life.'
   },
   {
-    title: 'Livelihood',
-    subtitle: 'Livelihood & Skills',
-    description: 'Skill training and placement support for underprivileged youth, empowering them with secure livelihood.',
-    icon: '💼',
-    color: 'bg-blue-600',
-    detail: 'Skill training and placement support for underprivileged youth'
+    title: 'Health & Wellness Outreach Clinics',
+    subtitle: 'Community Health',
+    description: 'Providing basic health support, mental wellness guidance, and awareness through camps and community sessions.',
+    icon: '❤️',
+    color: 'from-pink-300 to-pink-400',
+    textColor: 'text-pink-600',
+    detail: 'Providing basic health support, mental wellness guidance, and awareness through camps and community sessions.'
   },
   {
-    title: 'Women Empowerment',
-    subtitle: 'Women Empowerment',
-    description: 'Empowering adolescent girls & women through community engagement, education, and economic opportunities.',
-    icon: '👩',
-    color: 'bg-primary-600',
-    detail: 'Empowering adolescent girls & women through community engagement'
-  },
-  {
-    title: 'Nutrition & Wellness',
+    title: 'Community Nutrition & Meal Support',
     subtitle: 'Nutrition Security',
-    description: 'Ensuring nutrition security and promoting wellness across all age groups through community programs.',
+    description: 'Spreading nutrition awareness and supporting access to healthy meals for better physical well-being.',
     icon: '🥗',
-    color: 'bg-blue-600',
-    detail: 'Ensuring nutrition security and promoting wellness'
+    color: 'from-teal-300 to-teal-400',
+    textColor: 'text-teal-600',
+    detail: 'Spreading nutrition awareness and supporting access to healthy meals for better physical well-being.'
   },
   {
-    title: 'Disaster Response',
-    subtitle: 'Disaster Response',
-    description: 'Reach out and respond to the needs of disaster-affected people with immediate relief and long-term support.',
-    icon: '🆘',
-    color: 'bg-primary-600',
-    detail: 'Reach out and respond to the needs of disaster-affected people'
+    title: 'Mobile Library & Learning Center',
+    subtitle: 'Learning Access',
+    description: 'Taking books, learning materials, and educational activities directly to underserved communities.',
+    icon: '📖',
+    color: 'from-red-300 to-red-400',
+    textColor: 'text-red-600',
+    detail: 'Taking books, learning materials, and educational activities directly to underserved communities.'
+  },
+  {
+    title: 'Mentorship & Life Skills Development',
+    subtitle: 'Personal Growth',
+    description: 'Guiding young individuals with mentorship, decision-making skills, and personal growth support.',
+    icon: '🤝',
+    color: 'from-green-300 to-green-400',
+    textColor: 'text-green-600',
+    detail: 'Guiding young individuals with mentorship, decision-making skills, and personal growth support.'
   }
 ]
 
@@ -154,8 +160,7 @@ export const DONATION_TABS = [
   { id: 'memory', label: 'Donate in Memory', icon: '🕊️' },
   { id: 'occasion', label: 'Special Occasion', icon: '🎉' },
   { id: 'sme', label: 'SME Donations', icon: '🏢' },
-  { id: 'school', label: 'Sponsor a School', icon: '🏫' },
-  { id: 'equipment', label: 'Kitchen Equipment', icon: '🍳' }
+  { id: 'school', label: 'Sponsor a School', icon: '🏫' }
 ]
 
 export const PRESET_AMOUNTS = [

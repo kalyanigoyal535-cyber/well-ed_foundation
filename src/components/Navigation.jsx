@@ -35,8 +35,18 @@ function Navigation() {
     <div className="fixed top-0 left-0 right-0 z-[60] bg-white border-b border-primary-100 shadow-sm">
       <div className="max-w-full mx-auto px-2 sm:px-3 md:px-4 xl:px-6 relative">
         <div className="flex justify-between items-center py-1.5 sm:py-2 md:py-2.5 min-h-[36px] sm:min-h-[40px] md:h-11">
-          {/* Left Section - Contact Info (Mobile & Email) */}
-          <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 text-[10px] sm:text-xs md:text-sm flex-shrink-0">
+          {/* Left Section - Mission Tagline & Contact Info */}
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-1 min-w-0">
+            {/* Mission Tagline - Hidden on mobile */}
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-md bg-primary-50 border border-primary-200 flex-shrink-0">
+              <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              <span className="text-xs font-semibold text-primary-700 whitespace-nowrap">Building Hope, Transforming Lives</span>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 xl:gap-6 text-[10px] sm:text-xs md:text-sm flex-shrink-0">
             <a 
               href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
               className="flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-primary-600 transition-colors duration-300 group whitespace-nowrap"
@@ -58,18 +68,30 @@ function Navigation() {
               <span className="font-medium sm:hidden text-[10px]">Email</span>
             </a>
           </div>
+          </div>
           
-          {/* Right Section - Certificate */}
-          <div className="flex items-center flex-shrink-0">
+          {/* Right Section - Quick Action & Certificate */}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0">
+            {/* Quick Support Link - Hidden on mobile */}
+            <Link 
+              to="/donate" 
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md text-xs font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+              </svg>
+              <span>Support a Cause</span>
+            </Link>
+            
             {/* Great Place To Work Certification Badge */}
             <div className="flex items-center">
-              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border border-amber-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 px-2 sm:px-3 md:px-3 py-1 sm:py-1.5 md:py-1.5 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border border-amber-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-4 md:h-4 text-amber-600 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                 </svg>
-                <div className="flex items-center gap-1 sm:gap-1.5">
-                  <span className="text-[9px] sm:text-xs font-bold text-amber-700 whitespace-nowrap">Great Place To Work</span>
-                  <span className="text-[9px] sm:text-xs font-semibold text-amber-600 whitespace-nowrap">Certified</span>
+                <div className="flex items-center gap-1 sm:gap-1.5 md:gap-1.5">
+                  <span className="text-[9px] sm:text-xs md:text-xs font-bold text-amber-700 whitespace-nowrap">Great Place To Work</span>
+                  <span className="text-[9px] sm:text-xs md:text-xs font-semibold text-amber-600 whitespace-nowrap">Certified</span>
                 </div>
               </div>
             </div>
@@ -89,10 +111,12 @@ function Navigation() {
       <div className="max-w-full mx-auto px-0 w-full overflow-x-hidden relative">
         <div className="flex justify-between items-center h-16 sm:h-18 md:h-20 lg:h-20 w-full px-2 sm:px-3 md:px-4 lg:px-6">
           {/* Logo Section - Enhanced & Responsive */}
-          <Link 
-            to="/" 
-            className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 md:gap-3 group relative"
-          >
+          {isHomePage ? (
+            <a 
+              href="#banner" 
+              onClick={(e) => handleAnchorClick(e, 0)}
+              className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 md:gap-3 group relative smooth-scroll"
+            >
             <div className="relative flex items-center gap-1.5 sm:gap-2 md:gap-3">
               {/* Main Logo */}
               <div className="relative group-hover:scale-110 transition-transform duration-500">
@@ -122,7 +146,43 @@ function Navigation() {
             
             {/* Hover effect line */}
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gradient group-hover:w-full transition-all duration-500"></div>
-          </Link>
+          </a>
+          ) : (
+            <Link 
+              to="/" 
+              className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 md:gap-3 group relative"
+            >
+              <div className="relative flex items-center gap-1.5 sm:gap-2 md:gap-3">
+                {/* Main Logo */}
+                <div className="relative group-hover:scale-110 transition-transform duration-500">
+                  <img 
+                    src="/logo.png" 
+                    alt="Welled Foundation Logo" 
+                    className="relative h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:h-12 lg:w-12 xl:h-14 xl:w-14 object-contain"
+                    loading="eager"
+                    width="56"
+                    height="56"
+                  />
+                </div>
+                
+                {/* Text Logo with perfect alignment */}
+                <div className="relative group-hover:scale-105 transition-transform duration-500">
+                  <img 
+                    src="/text.png" 
+                    alt="Text Logo" 
+                    className="h-7 w-auto sm:h-8 sm:w-auto md:h-9 md:w-auto lg:h-10 lg:w-auto xl:h-11 xl:w-auto object-contain"
+                    loading="eager"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+              </div>
+              
+              {/* Hover effect line */}
+              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gradient group-hover:w-full transition-all duration-500"></div>
+            </Link>
+          )}
           
           {/* Desktop Menu - Premium Design */}
           <div className="hidden lg:flex items-center space-x-0.5 xl:space-x-1">
@@ -165,7 +225,7 @@ function Navigation() {
                   <span className="absolute inset-0 bg-primary-50/0 rounded-md group-hover:bg-primary-50 transition-all duration-300 -z-0"></span>
                 </a>
                 <a 
-                  href="#get-involved" 
+                  href="#contact" 
                   className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group smooth-scroll rounded-md"
                   onClick={(e) => handleAnchorClick(e, 100)}
                 >
@@ -173,6 +233,14 @@ function Navigation() {
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
                   <span className="absolute inset-0 bg-primary-50/0 rounded-md group-hover:bg-primary-50 transition-all duration-300 -z-0"></span>
                 </a>
+                <Link 
+                  to="/funds" 
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                >
+                  <span className="relative z-10 transition-all duration-300">Funds</span>
+                  <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
+                  <span className="absolute inset-0 bg-primary-50/0 rounded-md group-hover:bg-primary-50 transition-all duration-300 -z-0"></span>
+                </Link>
               </>
             ) : (
               <>
@@ -209,10 +277,18 @@ function Navigation() {
                   <span className="absolute inset-0 bg-primary-50/0 rounded-md group-hover:bg-primary-50 transition-all duration-300 -z-0"></span>
                 </Link>
                 <Link 
-                  to="/#get-involved" 
+                  to="/#contact" 
                   className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Get Involved</span>
+                  <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
+                  <span className="absolute inset-0 bg-primary-50/0 rounded-md group-hover:bg-primary-50 transition-all duration-300 -z-0"></span>
+                </Link>
+                <Link 
+                  to="/funds" 
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                >
+                  <span className="relative z-10 transition-all duration-300">Funds</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
                   <span className="absolute inset-0 bg-primary-50/0 rounded-md group-hover:bg-primary-50 transition-all duration-300 -z-0"></span>
                 </Link>
@@ -339,67 +415,50 @@ function Navigation() {
       {/* Mobile Menu - Premium Design */}
       {isMobileMenuOpen && (
         <div id="mobile-menu" className="lg:hidden bg-white border-t border-gray-200 shadow-2xl animate-in slide-in-from-top duration-300" role="menu" aria-label="Mobile navigation menu">
-          <div className="px-4 py-6 space-y-1">
+          <div className="px-4 py-3 space-y-1">
             {isHomePage ? (
               <>
-                <a href="#about" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
+                <a href="#about" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
                   About
                 </a>
-                <a href="#work" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
+                <a href="#work" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
                   Our Work
                 </a>
-                <a href="#impact" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
+                <a href="#impact" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
                   Impact
                 </a>
-                <a href="#stories" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
+                <a href="#stories" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
                   Stories
                 </a>
-                <a href="#get-involved" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
+                <a href="#contact" onClick={(e) => { handleAnchorClick(e, 100); setIsMobileMenuOpen(false); }} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2 smooth-scroll">
                   Get Involved
                 </a>
+                <Link to="/funds" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                  Funds
+                </Link>
               </>
             ) : (
               <>
-                <Link to="/#about" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                <Link to="/#about" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
                   About
                 </Link>
-                <Link to="/#work" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                <Link to="/#work" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
                   Our Work
                 </Link>
-                <Link to="/#impact" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                <Link to="/#impact" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
                   Impact
                 </Link>
-                <Link to="/#stories" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                <Link to="/#stories" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
                   Stories
                 </Link>
-                <Link to="/#get-involved" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                <Link to="/#contact" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
                   Get Involved
+                </Link>
+                <Link to="/funds" onClick={() => setIsMobileMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-semibold rounded-xl transition-all duration-300 transform hover:translate-x-2">
+                  Funds
                 </Link>
               </>
             )}
-            
-            {/* Social Media in Mobile Menu */}
-            <div className="pt-4 pb-2 border-t border-gray-200">
-              <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3 px-4">Follow Us</p>
-              <div className="flex items-center gap-3 px-4" role="list" aria-label="Social media links">
-                {SOCIAL_LINKS.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 transition-all duration-300 ${social.color} hover:text-white hover:scale-110 hover:shadow-lg`}
-                    aria-label={social.name}
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d={social.icon} />
-                    </svg>
-                  </a>
-                ))}
-              </div>
-            </div>
-            
-            <div className="pt-4 space-y-3 border-t border-gray-200">
               {isHomePage ? (
                 <>
                   <a 
@@ -469,7 +528,6 @@ function Navigation() {
               )}
             </div>
           </div>
-        </div>
       )}
     </nav>
 
