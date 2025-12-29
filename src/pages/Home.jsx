@@ -1205,23 +1205,31 @@ function Home() {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-            {impactStories.map((story, index) => (
+            {impactStories.map((story, index) => {
+              const isActive = index === currentStory
+              return (
               <div
                 key={index}
                 className={`transition-all duration-700 ${
-                  index === currentStory 
+                  isActive 
                     ? 'opacity-100 scale-100' 
                     : 'opacity-0 scale-95 absolute inset-0 pointer-events-none'
                 }`}
               >
                 {/* Main Story Card - Creative Design */}
-                <div className="bg-white rounded-xl lg:rounded-2xl shadow-2xl overflow-hidden border border-gray-200 max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-500" data-aos="zoom-in">
+                <div className={`bg-white rounded-xl lg:rounded-2xl shadow-2xl overflow-hidden border border-gray-200 max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-500 ${
+                  isActive ? 'animate-[fadeInUp_0.6s_ease-out]' : ''
+                }`}>
                   {/* Animated Gradient Border */}
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-yellow-400 to-primary-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10 blur-xl"></div>
                   
                   <div className="grid md:grid-cols-5 gap-0 relative">
                     {/* Left Side - Image with Creative Effects */}
-                    <div className="relative order-1 md:col-span-2 overflow-hidden aspect-square md:aspect-[4/5] group/image">
+                    <div className={`relative order-1 md:col-span-2 overflow-hidden aspect-square md:aspect-[4/5] group/image ${
+                      index % 2 === 0 ? '' : 'md:order-2'
+                    } ${
+                      isActive ? (index % 2 === 0 ? 'animate-[fadeInLeft_0.7s_ease-out_0.1s_both]' : 'animate-[fadeInRight_0.7s_ease-out_0.1s_both]') : ''
+                    }`}>
                       <OptimizedImage
                         src={story.image}
                         alt={`${story.name} - ${story.title}`}
@@ -1234,7 +1242,9 @@ function Home() {
                       <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-primary-600/30 to-transparent"></div>
                       
                       {/* Floating Badge on Image */}
-                      <div className="absolute top-4 left-4 transform rotate-[-5deg]">
+                      <div className={`absolute top-4 left-4 transform rotate-[-5deg] ${
+                        isActive ? 'animate-[zoomIn_0.5s_ease-out_0.3s_both]' : ''
+                      }`}>
                         <div className="px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border-2 border-yellow-400">
                           <span className="text-xs font-black text-primary-700 uppercase tracking-wider">
                             {story.badge.split(' ')[0]}
@@ -1246,7 +1256,7 @@ function Home() {
                     {/* Right Side - Content with Creative Styling */}
                     <div className={`p-4 md:p-5 lg:p-6 flex flex-col justify-center md:col-span-3 relative ${
                       index % 2 === 0 ? 'order-2' : 'order-1'
-                    }`}>
+                    } ${isActive ? (index % 2 === 0 ? 'animate-[fadeInRight_0.7s_ease-out_0.2s_both]' : 'animate-[fadeInLeft_0.7s_ease-out_0.2s_both]') : ''}`}>
                       {/* Decorative Background Pattern */}
                       <div className="absolute inset-0 opacity-5">
                         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%231A4B8A%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
@@ -1254,14 +1264,14 @@ function Home() {
                       
                       <div className="relative z-10">
                         {/* Quote Icon */}
-                        <div className="mb-4">
+                        <div className={`mb-4 ${isActive ? 'animate-[fadeInUp_0.5s_ease-out_0.3s_both]' : ''}`}>
                           <svg className="w-8 h-8 text-primary-200" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                           </svg>
                         </div>
                         
                         {/* Name & Title */}
-                        <div className="mb-4">
+                        <div className={`mb-4 ${isActive ? 'animate-[fadeInUp_0.5s_ease-out_0.35s_both]' : ''}`}>
                           <h4 className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 mb-3 leading-tight">
                             <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
                               {story.name}
@@ -1270,7 +1280,7 @@ function Home() {
                           </h4>
                           
                           {/* Creative Divider */}
-                          <div className="flex items-center gap-2 mb-4">
+                          <div className={`flex items-center gap-2 mb-4 ${isActive ? 'animate-[fadeInRight_0.6s_ease-out_0.4s_both]' : ''}`}>
                             <div className="h-1 w-12 bg-gradient-to-r from-primary-600 to-yellow-400 rounded-full"></div>
                             <div className="h-1 w-1 bg-yellow-400 rounded-full"></div>
                             <div className="h-1 w-8 bg-gradient-to-r from-yellow-400 to-primary-600 rounded-full"></div>
@@ -1278,12 +1288,12 @@ function Home() {
                         </div>
                         
                         {/* Description */}
-                        <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-5 font-medium">
+                        <p className={`text-gray-700 text-sm sm:text-base leading-relaxed mb-5 font-medium ${isActive ? 'animate-[fadeInUp_0.6s_ease-out_0.45s_both]' : ''}`}>
                           {story.description}
                         </p>
                         
                         {/* Badge with Creative Design */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-primary-50 to-yellow-50 border-2 border-primary-200 shadow-md hover:shadow-lg transition-shadow duration-300 group/badge">
+                        <div className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-primary-50 to-yellow-50 border-2 border-primary-200 shadow-md hover:shadow-lg transition-shadow duration-300 group/badge ${isActive ? 'animate-[fadeInUp_0.5s_ease-out_0.5s_both]' : ''}`}>
                           <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
                           <span className="text-xs font-black text-primary-700 uppercase tracking-widest">
                             {story.badge}
@@ -1304,7 +1314,7 @@ function Home() {
                   <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
-            ))}
+            )})}
             
             {/* Navigation Arrows */}
             <button
@@ -1327,7 +1337,7 @@ function Home() {
             </button>
             
             {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 sm:gap-3 mt-6 md:mt-8" data-aos="fade-up" data-aos-delay="400">
+            <div className="flex justify-center gap-2 sm:gap-3 mt-6 md:mt-8" data-aos="fade-up" data-aos-delay="550" data-aos-duration="500">
               {impactStories.map((_, index) => (
                 <button
                   key={index}
