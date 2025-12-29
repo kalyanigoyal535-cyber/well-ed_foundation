@@ -33,7 +33,7 @@ function Navigation() {
     <>
     {/* Top Header Bar - Contact Info & Certificate */}
     <div className="fixed top-0 left-0 right-0 z-[60] bg-white border-b border-primary-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="w-full px-2 sm:px-3 md:px-4 xl:px-6 relative">
         <div className="flex justify-between items-center py-1.5 sm:py-2 md:py-2.5 min-h-[36px] sm:min-h-[40px] md:h-11">
           {/* Left Section - Mission Tagline & Contact Info */}
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-1 min-w-0">
@@ -108,7 +108,7 @@ function Navigation() {
       {/* Accent line at top */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary-500/30 to-transparent"></div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden relative">
+      <div className="w-full px-2 sm:px-3 md:px-4 lg:px-6 overflow-x-hidden relative">
         <div className="flex justify-between items-center h-16 sm:h-18 md:h-20 lg:h-20 w-full">
           {/* Logo Section - Enhanced & Responsive */}
           {isHomePage ? (
