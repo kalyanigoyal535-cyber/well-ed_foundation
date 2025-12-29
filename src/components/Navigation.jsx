@@ -459,6 +459,29 @@ function Navigation() {
                 </Link>
               </>
             )}
+            
+            {/* Social Media Links Section */}
+            <div className="border-t border-gray-200 pt-4 mt-2">
+              <div className="flex items-center justify-center gap-3 px-4" role="list" aria-label="Social media links">
+                {SOCIAL_LINKS.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 transition-all duration-300 ${social.color} hover:text-white hover:scale-110 hover:shadow-lg group relative overflow-hidden`}
+                    aria-label={social.name}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <svg className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                      <path d={social.icon} />
+                    </svg>
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </a>
+                ))}
+              </div>
+            </div>
+            
               {isHomePage ? (
                 <>
                   <a 
