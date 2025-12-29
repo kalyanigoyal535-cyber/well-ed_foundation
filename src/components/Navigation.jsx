@@ -42,11 +42,11 @@ function Navigation() {
               <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span className="text-xs font-semibold text-primary-700 whitespace-nowrap">Building Hope, Transforming Lives</span>
+              <span className="text-[10px] lg:text-xs 2xl:text-sm font-semibold text-primary-700 whitespace-nowrap">Building Hope, Transforming Lives</span>
             </div>
             
             {/* Contact Info */}
-            <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 xl:gap-6 text-[10px] sm:text-xs md:text-sm flex-shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 xl:gap-6 text-[9px] sm:text-[10px] md:text-xs lg:text-sm flex-shrink-0">
             <a 
               href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
               className="flex items-center gap-1 sm:gap-1.5 text-gray-700 hover:text-primary-600 transition-colors duration-300 group whitespace-nowrap"
@@ -75,7 +75,7 @@ function Navigation() {
             {/* Quick Support Link - Hidden on mobile */}
             <Link 
               to="/donate" 
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md text-xs font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md text-[10px] lg:text-xs 2xl:text-sm font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -190,7 +190,7 @@ function Navigation() {
               <>
                 <a 
                   href="#about" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group smooth-scroll rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group smooth-scroll rounded-md"
                   onClick={(e) => handleAnchorClick(e, 100)}
                 >
                   <span className="relative z-10 transition-all duration-300">About</span>
@@ -199,7 +199,7 @@ function Navigation() {
                 </a>
                 <a 
                   href="#work" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group smooth-scroll rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group smooth-scroll rounded-md"
                   onClick={(e) => handleAnchorClick(e, 100)}
                 >
                   <span className="relative z-10 transition-all duration-300">Our Work</span>
@@ -208,7 +208,7 @@ function Navigation() {
                 </a>
                 <a 
                   href="#impact" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group smooth-scroll rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group smooth-scroll rounded-md"
                   onClick={(e) => handleAnchorClick(e, 100)}
                 >
                   <span className="relative z-10 transition-all duration-300">Impact</span>
@@ -217,7 +217,7 @@ function Navigation() {
                 </a>
                 <a 
                   href="#stories" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group smooth-scroll rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group smooth-scroll rounded-md"
                   onClick={(e) => handleAnchorClick(e, 100)}
                 >
                   <span className="relative z-10 transition-all duration-300">Stories</span>
@@ -226,7 +226,7 @@ function Navigation() {
                 </a>
                 <a 
                   href="#contact" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group smooth-scroll rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group smooth-scroll rounded-md"
                   onClick={(e) => handleAnchorClick(e, 100)}
                 >
                   <span className="relative z-10 transition-all duration-300">Get Involved</span>
@@ -235,7 +235,7 @@ function Navigation() {
                 </a>
                 <Link 
                   to="/funds" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Funds</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -246,7 +246,7 @@ function Navigation() {
               <>
                 <Link 
                   to="/#about" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">About</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -254,7 +254,7 @@ function Navigation() {
                 </Link>
                 <Link 
                   to="/#work" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Our Work</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -262,7 +262,7 @@ function Navigation() {
                 </Link>
                 <Link 
                   to="/#impact" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Impact</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -270,7 +270,7 @@ function Navigation() {
                 </Link>
                 <Link 
                   to="/#stories" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Stories</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -278,7 +278,7 @@ function Navigation() {
                 </Link>
                 <Link 
                   to="/#contact" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Get Involved</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -286,7 +286,7 @@ function Navigation() {
                 </Link>
                 <Link 
                   to="/funds" 
-                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-sm xl:text-base relative group rounded-md"
+                  className="px-3 xl:px-4 py-2 text-gray-700 hover:text-primary-600 transition-all duration-300 font-medium text-xs lg:text-sm 2xl:text-base relative group rounded-md"
                 >
                   <span className="relative z-10 transition-all duration-300">Funds</span>
                   <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 group-hover:w-3/4 transition-all duration-300 ease-out rounded-full"></span>
@@ -323,7 +323,7 @@ function Navigation() {
                 <>
                   <a 
                     href="#contact" 
-                    className="group relative px-4 py-2 text-gray-700 font-semibold rounded-lg transition-all duration-300 text-xs xl:text-sm border border-gray-200 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 hover:shadow-md overflow-hidden smooth-scroll"
+                    className="group relative px-4 py-2 text-gray-700 font-semibold rounded-lg transition-all duration-300 text-[10px] lg:text-xs 2xl:text-sm border border-gray-200 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 hover:shadow-md overflow-hidden smooth-scroll"
                     onClick={(e) => handleAnchorClick(e, 100)}
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
@@ -335,7 +335,7 @@ function Navigation() {
                   </a>
                   <Link 
                     to="/donate" 
-                    className="group relative px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold rounded-lg transition-all duration-300 text-xs xl:text-sm shadow-md hover:shadow-lg hover:shadow-primary-500/30 transform hover:scale-[1.02] overflow-hidden"
+                    className="group relative px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold rounded-lg transition-all duration-300 text-[10px] lg:text-xs 2xl:text-sm shadow-md hover:shadow-lg hover:shadow-primary-500/30 transform hover:scale-[1.02] overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <svg className="w-3.5 h-3.5 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -350,7 +350,7 @@ function Navigation() {
                 <>
                   <Link 
                     to="/#contact" 
-                    className="group relative px-4 py-2 text-gray-700 font-semibold rounded-lg transition-all duration-300 text-xs xl:text-sm border border-gray-200 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 hover:shadow-md overflow-hidden"
+                    className="group relative px-4 py-2 text-gray-700 font-semibold rounded-lg transition-all duration-300 text-[10px] lg:text-xs 2xl:text-sm border border-gray-200 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 hover:shadow-md overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <svg className="w-3.5 h-3.5 transform group-hover:rotate-12 transition-transform duration-300 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -361,7 +361,7 @@ function Navigation() {
                   </Link>
                   <Link 
                     to="/donate" 
-                    className="group relative px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold rounded-lg transition-all duration-300 text-xs xl:text-sm shadow-md hover:shadow-lg hover:shadow-primary-500/30 transform hover:scale-[1.02] overflow-hidden"
+                    className="group relative px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold rounded-lg transition-all duration-300 text-[10px] lg:text-xs 2xl:text-sm shadow-md hover:shadow-lg hover:shadow-primary-500/30 transform hover:scale-[1.02] overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center gap-1.5">
                       <svg className="w-3.5 h-3.5 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

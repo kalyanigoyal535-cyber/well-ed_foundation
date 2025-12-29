@@ -1440,11 +1440,8 @@ function Home() {
                     </div>
                     <div className="ml-3 sm:ml-4">
                       <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">Email</h4>
-                      <a href="mailto:info@welledfoundation.org" className="text-blue-900 hover:text-blue-800 transition-colors font-medium block mb-1 text-sm sm:text-base break-words">
-                        info@welledfoundation.org
-                      </a>
-                      <a href="mailto:partnerships@welledfoundation.org" className="text-blue-900 hover:text-blue-800 transition-colors font-medium text-sm sm:text-base break-words">
-                        partnerships@welledfoundation.org
+                      <a href="https://mail.google.com/mail/?view=cm&to=welledfoundation@gmail.com" target="_blank" rel="noopener noreferrer" className="text-blue-900 hover:text-blue-800 transition-colors font-medium block text-sm sm:text-base break-words">
+                        welledfoundation@gmail.com
                       </a>
                     </div>
                   </div>

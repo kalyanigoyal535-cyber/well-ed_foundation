@@ -202,8 +202,8 @@ export const INDIAN_STATES = [
 ]
 
 export const CONTACT_INFO = {
-  email: 'info@welledfoundation.org',
-  emailPartnerships: 'partnerships@welledfoundation.org',
+  email: 'welledfoundation@gmail.com',
+  emailPartnerships: 'welledfoundation@gmail.com',
   phone: '+91-1800-123-4567',
   phoneAlt: '+91-98765-43210',
   address: {

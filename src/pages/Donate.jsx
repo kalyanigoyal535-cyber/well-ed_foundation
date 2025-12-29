@@ -917,7 +917,7 @@ function Donate() {
                 You can donate via bank transfer, cheque, or demand draft. Please contact us for bank details.
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Email:</strong> info@welledfoundation.org<br />
+                <strong>Email:</strong> welledfoundation@gmail.com<br />
                 <strong>Phone:</strong> +91-1800-123-4567
               </p>
             </div>
