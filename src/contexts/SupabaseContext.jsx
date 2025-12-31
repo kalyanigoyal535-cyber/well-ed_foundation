@@ -35,6 +35,11 @@ export const SupabaseProvider = ({ children }) => {
         setLoading(false)
       })
       .catch((error) => {
+        // Silently handle errors if Supabase is not properly configured
+        if (!supabaseUrl || !supabaseAnonKey) {
+          setLoading(false)
+          return
+        }
         console.error('Error getting session:', error)
         setLoading(false)
       })
@@ -54,6 +59,11 @@ export const SupabaseProvider = ({ children }) => {
         }
       }
     } catch (error) {
+      // Silently handle errors if Supabase is not properly configured
+      if (!supabaseUrl || !supabaseAnonKey) {
+        setLoading(false)
+        return
+      }
       console.error('Error setting up auth state listener:', error)
       setLoading(false)
     }
