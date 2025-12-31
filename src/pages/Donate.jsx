@@ -308,8 +308,8 @@ function Donate() {
           </div>
 
           {/* Donation Type Tabs */}
-          <div className="mb-8 w-full overflow-x-auto px-0" data-aos="fade-up" data-aos-delay="100">
-            <div className="flex flex-nowrap justify-center gap-1 sm:gap-1.5 mb-6 w-full px-0" role="tablist" aria-label="Donation type selection">
+          <div className="mb-8 w-full" data-aos="fade-up" data-aos-delay="100">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 mb-6 w-full" role="tablist" aria-label="Donation type selection">
               {DONATION_TABS.map(tab => (
                 <button
                   key={tab.id}
@@ -318,7 +318,7 @@ function Donate() {
                   aria-selected={activeTab === tab.id}
                   aria-controls={`panel-${tab.id}`}
                   id={`tab-${tab.id}`}
-                  className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+                  className={`px-2 sm:px-3 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 flex items-center justify-center ${
                     activeTab === tab.id
                       ? 'bg-accent-gradient text-white shadow-lg shadow-primary-200 scale-105'
                       : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-100 border-2 border-gray-200 hover:border-primary-300 shadow-sm hover:shadow-md'
@@ -327,7 +327,7 @@ function Donate() {
                 >
                   <span className="mr-1 text-sm sm:text-base">{tab.icon}</span>
                   <span className="hidden sm:inline">{tab.label}</span>
-                  <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
+                  <span className="sm:hidden text-[10px]">{tab.label.split(' ')[0]}</span>
                 </button>
               ))}
             </div>
