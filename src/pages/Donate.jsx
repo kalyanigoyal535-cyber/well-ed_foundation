@@ -6,22 +6,6 @@ import { DONATION_TABS, PRESET_AMOUNTS, INDIAN_STATES } from '../constants/data'
 import { supabase } from '../lib/supabase'
 import { testDonationInsert, submitDonation } from '../utils/testDonationInsert'
 
-// Desktop banner carousel images
-const desktopBanners = [
-  '/banner.jpg',
-  '/banner2.jpg',
-  '/banner3.jpg',
-  '/banner4.jpg',
-]
-
-// Mobile banner carousel images
-const mobileBanners = [
-  '/banner-mobile.jpg',
-  '/banner2-mobile.jpg',
-  '/banner3-mobile.jpg',
-  '/banner4-mobile.jpg',
-]
-
 function Donate() {
   const location = useLocation()
   const [activeTab, setActiveTab] = useState('general')
@@ -59,16 +43,6 @@ function Donate() {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Banner carousel state
-  const [isMobile, setIsMobile] = useState(false)
-  const [currentBanner, setCurrentBanner] = useState(0)
-  const [bannerHeight, setBannerHeight] = useState(null)
-
-  // Use mobile banners on mobile, desktop banners on desktop
-  const banners = useMemo(() => {
-    return isMobile ? mobileBanners : desktopBanners
-  }, [isMobile])
-
   // 🧪 TEST FUNCTIONS: Make available globally for easy testing
   // Call from browser console: window.testDonationInsert() or window.submitDonation()
   useEffect(() => {
@@ -95,56 +69,6 @@ function Donate() {
     }, 100)
     return () => clearTimeout(timer)
   }, [location.pathname])
-
-  // Detect mobile device for banner carousel
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768) // md breakpoint
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  // Reset to first banner when switching between mobile/desktop
-  useEffect(() => {
-    setCurrentBanner(0)
-  }, [isMobile])
-
-  // Measure banner image height
-  useEffect(() => {
-    const updateHeight = () => {
-      if (banners.length === 0) return
-      const img = new Image()
-      img.src = banners[currentBanner]
-      img.onload = () => {
-        const aspectRatio = img.height / img.width
-        const height = (window.innerWidth * aspectRatio)
-        setBannerHeight(height)
-      }
-    }
-    
-    updateHeight()
-    
-    window.addEventListener('resize', updateHeight)
-    return () => window.removeEventListener('resize', updateHeight)
-  }, [currentBanner, banners])
-
-  // Auto-play carousel
-  useEffect(() => {
-    if (banners.length <= 1) return
-    
-    const interval = setInterval(() => {
-      setCurrentBanner((prev) => (prev + 1) % banners.length)
-    }, 5000) // Change slide every 5 seconds
-
-    return () => clearInterval(interval)
-  }, [banners.length])
-
-  const goToSlide = (index) => {
-    setCurrentBanner(index)
-  }
 
   // Memoize calculation to avoid recalculation on every render
   const calculateChildren = useCallback((amount) => {
@@ -348,46 +272,6 @@ function Donate() {
       return (
         <div className="bg-gray-50 overflow-x-hidden w-full max-w-full">
           <Navigation />
-          
-          {/* Hero Section with Banner Carousel */}
-          <section id="banner" className="relative w-full overflow-hidden mt-20 sm:mt-24 md:mt-24 lg:mt-28 xl:mt-32" data-aos="fade-in">
-            {/* Banner Carousel Container */}
-            <div 
-              className="relative w-full"
-              style={{ height: bannerHeight ? `${bannerHeight}px` : 'auto', minHeight: '400px' }}
-            >
-              {banners.map((banner, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-in-out ${
-                    index === currentBanner ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                  }`}
-                  style={{
-                    backgroundImage: `url(${banner})`
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Navigation Dots - Only show if multiple banners */}
-            {banners.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 md:gap-3" data-aos="fade-up" data-aos-delay="300">
-                {banners.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`transition-all duration-300 rounded-full ${
-                      index === currentBanner
-                        ? 'w-8 md:w-10 h-2 md:h-2.5 bg-white shadow-lg'
-                        : 'w-2 md:w-2.5 h-2 md:h-2.5 bg-white/50 hover:bg-white/70'
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </section>
-
           <section className="py-16 sm:py-20 md:py-24 bg-gray-50 pt-24 sm:pt-28 md:pt-32 w-full max-w-full">
             <div className="max-w-7xl mx-auto w-full overflow-x-hidden px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 mt-4 sm:mt-8 md:mt-12 relative" data-aos="fade-up">
