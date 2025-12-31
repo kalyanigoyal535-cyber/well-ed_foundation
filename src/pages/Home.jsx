@@ -326,25 +326,25 @@ import Footer from '../components/Footer'
 import OptimizedImage from '../components/OptimizedImage'
 import { STATS, PROGRAMS } from '../constants/data'
 
+// Desktop banner carousel images
+const desktopBanners = [
+  '/banner.jpg',
+  '/banner2.jpg',
+  '/banner3.jpg',
+  '/banner4.jpg',
+]
+
+// Mobile banner carousel images
+const mobileBanners = [
+  '/banner-mobile.jpg',
+  '/banner2-mobile.jpg',
+  '/banner3-mobile.jpg',
+  '/banner4-mobile.jpg',
+]
+
 function Home() {
   const location = useLocation()
   
-  // Desktop banner carousel images
-  const desktopBanners = [
-    '/banner.jpg',
-    '/banner2.jpg',
-    // Add more desktop banner images here, e.g.:
-    // '/banner3.jpg',
-  ]
-
-  // Mobile banner carousel images - add mobile-optimized banner images here
-  const mobileBanners = [
-    '/banner-mobile.jpg', // Add your mobile banner images
-    '/banner2-mobile.jpg',
-    // Add more mobile banner images here, e.g.:
-    // '/banner3-mobile.jpg',
-  ]
-
   // Detect mobile device
   const [isMobile, setIsMobile] = useState(false)
   
@@ -457,13 +457,6 @@ function Home() {
       description: 'Rekha often ignored minor health issues due to lack of information. After attending a health outreach camp, she learned to recognize early warning signs and seek timely help, preventing bigger problems later.',
       image: '/impact-rekha.jpg',
       badge: 'HEALTH AWARENESS LEADER'
-    },
-    {
-      name: 'Aman',
-      title: 'A School Student',
-      description: 'Aman had difficulty concentrating in school. Wellness education sessions helped his family understand the role of nutrition and sleep. Simple changes improved his focus and learning ability.',
-      image: '/impact-aman.jpg',
-      badge: 'STUDENT SUCCESS'
     }
   ]
   

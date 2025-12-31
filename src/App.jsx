@@ -1,11 +1,18 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 const Home = React.lazy(() => import('./pages/Home'))
 const Donate = React.lazy(() => import('./pages/Donate'))
 const Funds = React.lazy(() => import('./pages/Funds'))
 import ErrorBoundary from './components/ErrorBoundary'
+import { testConnection } from './utils/testConnection'
 
 function App() {
+  // Test Supabase connection on app load (remove in production if not needed)
+  useEffect(() => {
+    // Test connection on app start
+    testConnection()
+  }, [])
+
   return (
     <ErrorBoundary>
       <div className="w-full ">
