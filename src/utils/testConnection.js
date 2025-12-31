@@ -43,20 +43,26 @@ export const testConnection = async () => {
     console.log('   URL:', supabaseUrl)
     console.log('   Session:', sessionData.session ? 'Active' : 'No active session')
     
-    // Test 4: Optionally test donations table if it exists
-    const { error: tableError } = await supabase
-      .from('donations')
-      .select('*')
-      .limit(1)
+    // Test 4: Optionally test donations table if it exists (silently fail if table doesn't exist)
+    try {
+      const { error: tableError } = await supabase
+        .from('donations')
+        .select('*')
+        .limit(1)
 
-    if (tableError) {
-      if (tableError.code === 'PGRST116' || tableError.message.includes('does not exist')) {
-        console.log('⚠️  Table "donations" not found yet - create it in Supabase dashboard')
+      if (tableError) {
+        if (tableError.code === 'PGRST116' || tableError.message.includes('does not exist') || tableError.message.includes('schema cache')) {
+          // Silently skip - table doesn't exist yet, which is fine
+          console.log('ℹ️  Table "donations" not found yet - create it in Supabase dashboard when ready')
+        } else {
+          console.log('⚠️  Could not access "donations" table:', tableError.message)
+        }
       } else {
-        console.log('⚠️  Could not access "donations" table:', tableError.message)
+        console.log('✅ "donations" table is accessible!')
       }
-    } else {
-      console.log('✅ "donations" table is accessible!')
+    } catch (error) {
+      // Silently handle any errors during table check
+      console.log('ℹ️  Table check skipped (table may not exist yet)')
     }
 
     return true

@@ -1,25 +1,24 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom'
 const Home = React.lazy(() => import('./pages/Home'))
 const Donate = React.lazy(() => import('./pages/Donate'))
 const Funds = React.lazy(() => import('./pages/Funds'))
 import ErrorBoundary from './components/ErrorBoundary'
-import { testConnection } from './utils/testConnection'
+// import { testConnection } from './utils/testConnection' // Disabled by default - uncomment if needed
 
 function App() {
-  // Test Supabase connection on app load (only in development, and only if configured)
-  useEffect(() => {
-    // Only test if Supabase is configured
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-    
-    if (supabaseUrl && supabaseAnonKey && import.meta.env.DEV) {
-      // Test connection on app start (only in development)
-      testConnection().catch((error) => {
-        console.warn('Supabase connection test failed:', error)
-      })
-    }
-  }, [])
+  // Note: testConnection is disabled by default to avoid console noise
+  // Uncomment the code below if you want to test Supabase connection
+  // useEffect(() => {
+  //   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+  //   const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+  //   
+  //   if (supabaseUrl && supabaseAnonKey && import.meta.env.DEV) {
+  //     testConnection().catch((error) => {
+  //       console.warn('Supabase connection test failed:', error)
+  //     })
+  //   }
+  // }, [])
 
   return (
     <ErrorBoundary>
