@@ -7,10 +7,18 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { testConnection } from './utils/testConnection'
 
 function App() {
-  // Test Supabase connection on app load (remove in production if not needed)
+  // Test Supabase connection on app load (only in development, and only if configured)
   useEffect(() => {
-    // Test connection on app start
-    testConnection()
+    // Only test if Supabase is configured
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+    
+    if (supabaseUrl && supabaseAnonKey && import.meta.env.DEV) {
+      // Test connection on app start (only in development)
+      testConnection().catch((error) => {
+        console.warn('Supabase connection test failed:', error)
+      })
+    }
   }, [])
 
   return (

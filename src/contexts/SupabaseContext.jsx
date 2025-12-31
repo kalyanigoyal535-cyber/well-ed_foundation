@@ -17,22 +17,46 @@ export const SupabaseProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Get initial session and user
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setUser(session?.user ?? null)
+    // Check if Supabase is properly configured
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+    // If Supabase is not configured, skip initialization and just set loading to false
+    if (!supabaseUrl || !supabaseAnonKey) {
       setLoading(false)
-    })
+      return
+    }
+
+    // Get initial session and user
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        setSession(session)
+        setUser(session?.user ?? null)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error('Error getting session:', error)
+        setLoading(false)
+      })
 
     // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-    })
+    try {
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        setSession(session)
+        setUser(session?.user ?? null)
+      })
 
-    return () => subscription.unsubscribe()
+      return () => {
+        if (subscription) {
+          subscription.unsubscribe()
+        }
+      }
+    } catch (error) {
+      console.error('Error setting up auth state listener:', error)
+      setLoading(false)
+    }
   }, [])
 
   // Auth helper methods

@@ -301,18 +301,26 @@ function Donate() {
         created_at: new Date().toISOString(),
       }
 
-      // Save to Supabase
-      const { data, error } = await supabase
-        .from('donations')
-        .insert([donationData])
-        .select()
+      // Save to Supabase (only if configured)
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+      
+      if (supabaseUrl && supabaseAnonKey) {
+        const { data, error } = await supabase
+          .from('donations')
+          .insert([donationData])
+          .select()
 
-      if (error) {
-        console.error('Error saving donation:', error)
-        throw error
+        if (error) {
+          console.error('Error saving donation:', error)
+          throw error
+        }
+
+        console.log('Donation saved successfully:', data)
+      } else {
+        console.warn('Supabase not configured - donation data not saved to database')
+        // In production, you might want to send this to an alternative endpoint
       }
-
-      console.log('Donation saved successfully:', data)
       
       // Payment gateway integration will go here
       // For now, show success message
