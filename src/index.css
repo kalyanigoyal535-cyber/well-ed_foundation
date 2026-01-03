@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* AOS Animation Library */
-@import 'aos/dist/aos.css';
-
-/* ✅ SINGLE SCROLL SOURCE */
 html, body {
   margin: 0;
   padding: 0;

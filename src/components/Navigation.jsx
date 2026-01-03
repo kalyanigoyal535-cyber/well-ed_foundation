@@ -31,13 +31,10 @@ function Navigation() {
 
   return (
     <>
-    {/* Top Header Bar - Contact Info & Certificate */}
     <div className="fixed top-0 left-0 right-0 z-[60] bg-white border-b border-primary-100 shadow-sm">
       <div className="w-full px-2 sm:px-3 md:px-4 xl:px-6 relative">
         <div className="flex justify-between items-center py-1.5 sm:py-2 md:py-2.5 min-h-[36px] sm:min-h-[40px] md:h-11">
-          {/* Left Section - Mission Tagline & Contact Info */}
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6 flex-1 min-w-0">
-            {/* Mission Tagline - Hidden on mobile */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-md bg-primary-50 border border-primary-200 flex-shrink-0">
               <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -45,7 +42,6 @@ function Navigation() {
               <span className="text-[10px] lg:text-xs 2xl:text-sm font-semibold text-primary-700 whitespace-nowrap">Building Hope, Transforming Lives</span>
             </div>
             
-            {/* Contact Info */}
             <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4 xl:gap-6 text-[9px] sm:text-[10px] md:text-xs lg:text-sm flex-shrink-0">
             <a 
               href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
@@ -70,9 +66,7 @@ function Navigation() {
           </div>
           </div>
           
-          {/* Right Section - Quick Action & Certificate */}
           <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0">
-            {/* Quick Support Link - Hidden on mobile */}
             <Link 
               to="/donate" 
               className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md text-[10px] lg:text-xs 2xl:text-sm font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105"
@@ -83,7 +77,6 @@ function Navigation() {
               <span>Support a Cause</span>
             </Link>
             
-            {/* Great Place To Work Certification Badge */}
             <div className="flex items-center">
               <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 px-2 sm:px-3 md:px-3 py-1 sm:py-1.5 md:py-1.5 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border border-amber-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group">
                 <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-4 md:h-4 text-amber-600 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -105,12 +98,10 @@ function Navigation() {
         ? 'bg-white shadow-lg shadow-primary-500/5 border-b border-primary-100' 
         : 'bg-white border-b border-primary-100'
     }`}>
-      {/* Accent line at top */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary-500/30 to-transparent"></div>
       
       <div className="w-full px-2 sm:px-3 md:px-4 lg:px-6 overflow-x-hidden relative">
         <div className="flex justify-between items-center h-16 sm:h-18 md:h-20 lg:h-20 w-full">
-          {/* Logo Section - Enhanced & Responsive */}
           {isHomePage ? (
             <a 
               href="#banner" 
@@ -118,7 +109,6 @@ function Navigation() {
               className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 md:gap-3 group relative smooth-scroll"
             >
             <div className="relative flex items-center gap-1.5 sm:gap-2 md:gap-3">
-              {/* Main Logo */}
               <div className="relative group-hover:scale-110 transition-transform duration-500">
                 <img 
                   src="/logo.png" 
@@ -130,7 +120,6 @@ function Navigation() {
                 />
               </div>
               
-              {/* Text Logo with perfect alignment */}
               <div className="relative group-hover:scale-105 transition-transform duration-500">
                 <img 
                   src="/text.png" 
@@ -144,7 +133,6 @@ function Navigation() {
               </div>
             </div>
             
-            {/* Hover effect line */}
             <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gradient group-hover:w-full transition-all duration-500"></div>
           </a>
           ) : (
@@ -153,7 +141,6 @@ function Navigation() {
               className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 md:gap-3 group relative"
             >
               <div className="relative flex items-center gap-1.5 sm:gap-2 md:gap-3">
-                {/* Main Logo */}
                 <div className="relative group-hover:scale-110 transition-transform duration-500">
                   <img 
                     src="/logo.png" 
@@ -165,7 +152,6 @@ function Navigation() {
                   />
                 </div>
                 
-                {/* Text Logo with perfect alignment */}
                 <div className="relative group-hover:scale-105 transition-transform duration-500">
                   <img 
                     src="/text.png" 
@@ -179,12 +165,10 @@ function Navigation() {
                 </div>
               </div>
               
-              {/* Hover effect line */}
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gradient group-hover:w-full transition-all duration-500"></div>
             </Link>
           )}
           
-          {/* Desktop Menu - Premium Design */}
           <div className="hidden lg:flex items-center space-x-0.5 xl:space-x-1">
             {isHomePage ? (
               <>
@@ -296,9 +280,7 @@ function Navigation() {
             )}
           </div>
 
-          {/* Right Section - Desktop: Social Icons + Buttons */}
           <div className="hidden lg:flex items-center gap-3 xl:gap-4">
-              {/* Social Media Icons */}
               <div className="flex items-center gap-2 pr-3 xl:pr-4" role="list" aria-label="Social media links">
               {SOCIAL_LINKS.map((social, index) => (
                 <a
@@ -317,7 +299,6 @@ function Navigation() {
               ))}
             </div>
 
-            {/* Action Buttons - Premium Design */}
             <div className="flex items-center gap-3 xl:gap-4">
               {isHomePage ? (
                 <>
@@ -376,7 +357,6 @@ function Navigation() {
             </div>
           </div>
 
-          {/* Mobile/Tablet: Show Only Donate Now Button + Menu Toggle */}
           <div className="lg:hidden flex items-center gap-2 sm:gap-3">
             <Link 
               to="/donate" 
@@ -412,7 +392,6 @@ function Navigation() {
         </div>
       </div>
 
-      {/* Mobile Menu - Premium Design */}
       {isMobileMenuOpen && (
         <div id="mobile-menu" className="lg:hidden bg-white border-t border-gray-200 shadow-2xl animate-in slide-in-from-top duration-300" role="menu" aria-label="Mobile navigation menu">
           <div className="px-4 py-3 space-y-1">
@@ -460,7 +439,6 @@ function Navigation() {
               </>
             )}
             
-            {/* Social Media Links Section */}
             <div className="border-t border-gray-200 pt-4 mt-2">
               <div className="flex items-center justify-center gap-3 px-4" role="list" aria-label="Social media links">
                 {SOCIAL_LINKS.map((social, index) => (
@@ -554,7 +532,6 @@ function Navigation() {
       )}
     </nav>
 
-    {/* Floating Social Media Quick Access - Mobile/Tablet Only - Outside Nav */}
     {isSocialMenuOpen && (
       <div
         className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-[9998]"
@@ -563,17 +540,13 @@ function Navigation() {
       />
     )}
 
-      {/* Floating Social Media Quick Access */}
     <div className="lg:hidden fixed bottom-6 right-6 z-[9999]">
-        {/* Social Media Icons in Circular Pattern - Northwest Area */}
         {SOCIAL_LINKS.map((social, index) => {
-          // Calculate angle for circular distribution in northwest area
-          // Center around 135 degrees (northwest) with 90-degree spread
-          const centerAngle = 135 // Northwest direction
-          const spread = 90 // Total spread in degrees
-          const startAngle = centerAngle - (spread / 2) // Start from north-northwest
+          const centerAngle = 135
+          const spread = 90
+          const startAngle = centerAngle - (spread / 2)
           const angle = (startAngle + (index * (spread / (SOCIAL_LINKS.length - 1)))) * (Math.PI / 180)
-          const radius = 95 // Distance from button center
+          const radius = 95
           const x = Math.cos(angle) * radius
           const y = Math.sin(angle) * radius
           
@@ -585,8 +558,8 @@ function Navigation() {
               rel="noopener noreferrer"
               className={`absolute w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center text-gray-600 transition-all duration-500 ease-out ${social.color} hover:text-white hover:shadow-2xl group overflow-hidden`}
               style={{
-                bottom: `${28 + Math.abs(y)}px`, // Add y to go up (north) from bottom
-                right: `${28 + Math.abs(x)}px`, // Add x to go left (west) from right
+                bottom: `${28 + Math.abs(y)}px`,
+                right: `${28 + Math.abs(x)}px`,
                 transform: isSocialMenuOpen 
                   ? 'translate(50%, 50%) scale(1)' 
                   : 'translate(50%, 50%) scale(0)',
@@ -607,7 +580,6 @@ function Navigation() {
           )
         })}
 
-        {/* Main Toggle Button */}
         <button
           onClick={toggleSocialMenu}
           className="w-14 h-14 rounded-full bg-[#0f2439] hover:bg-[#0f2439] text-white shadow-2xl flex items-center justify-center transition-all duration-500 transform hover:scale-110 relative focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"

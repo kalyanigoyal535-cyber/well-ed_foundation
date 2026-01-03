@@ -1,332 +1,10 @@
 ﻿import { useEffect, useState } from 'react'
-import AOS from 'aos'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Link, useLocation } from 'react-router-dom'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import OptimizedImage from '../components/OptimizedImage'
 import { STATS, PROGRAMS } from '../constants/data'
 
-// Desktop banner carousel images
 const desktopBanners = [
   '/banner.jpg',
   '/banner2.jpg',
@@ -334,7 +12,6 @@ const desktopBanners = [
   '/banner4.jpg',
 ]
 
-// Mobile banner carousel images
 const mobileBanners = [
   '/banner-mobile.jpg',
   '/banner2-mobile.jpg',
@@ -344,16 +21,12 @@ const mobileBanners = [
 
 function Home() {
   const location = useLocation()
-  
-  // Detect mobile device
   const [isMobile, setIsMobile] = useState(false)
-  
-  // About Us expand/collapse state
   const [isAboutExpanded, setIsAboutExpanded] = useState(false)
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768) // md breakpoint
+      setIsMobile(window.innerWidth < 768)
     }
     
     checkMobile()
@@ -361,39 +34,19 @@ function Home() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Use mobile banners on mobile, desktop banners on desktop
   const banners = isMobile ? mobileBanners : desktopBanners
 
   const [currentBanner, setCurrentBanner] = useState(0)
   const [bannerHeight, setBannerHeight] = useState(null)
 
-  // Initialize AOS on component mount
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false,
-      offset: 100,
-    })
-  }, [])
-
-  useEffect(() => {
-    // Smooth scroll to top when page loads or route changes
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    // Refresh AOS after a short delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      AOS.refresh()
-    }, 100)
-    return () => clearTimeout(timer)
   }, [location.pathname])
 
-  // Reset to first banner when switching between mobile/desktop
   useEffect(() => {
     setCurrentBanner(0)
   }, [isMobile])
 
-  // Measure banner image height
   useEffect(() => {
     const updateHeight = () => {
       if (banners.length === 0) return
@@ -412,13 +65,12 @@ function Home() {
     return () => window.removeEventListener('resize', updateHeight)
   }, [currentBanner, banners])
 
-  // Auto-play carousel
   useEffect(() => {
     if (banners.length <= 1) return
     
     const interval = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % banners.length)
-    }, 5000) // Change slide every 5 seconds
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [banners.length])
@@ -435,7 +87,6 @@ function Home() {
     setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length)
   }
 
-  // Impact Stories Carousel
   const impactStories = [
     {
       name: 'Sunita',
@@ -464,7 +115,6 @@ function Home() {
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
   
-  // Auto-play impact stories carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStory((prev) => (prev + 1) % impactStories.length)
@@ -484,7 +134,6 @@ function Home() {
     setCurrentStory(index)
   }
   
-  // Touch handlers for swipe
   const minSwipeDistance = 50
   
   const onTouchStart = (e) => {
@@ -511,12 +160,9 @@ function Home() {
 
   return (
     <div className="App bg-white w-full">
-      {/* Navigation */}
       <Navigation />
 
-      {/* Hero Section with Banner Carousel */}
-      <section id="banner" className="relative w-full overflow-hidden mt-20 sm:mt-24 md:mt-24 lg:mt-28 xl:mt-32" data-aos="fade-in">
-        {/* Banner Carousel Container */}
+      <section id="banner" className="relative w-full overflow-hidden mt-20 sm:mt-24 md:mt-24 lg:mt-28 xl:mt-32">
         <div 
           className="relative w-full"
           style={{ height: bannerHeight ? `${bannerHeight}px` : 'auto', minHeight: '400px' }}
@@ -534,9 +180,8 @@ function Home() {
           ))}
         </div>
 
-        {/* Navigation Dots - Only show if multiple banners */}
         {banners.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 md:gap-3" data-aos="fade-up" data-aos-delay="300">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 md:gap-3">
             {banners.map((_, index) => (
               <button
                 key={index}
@@ -553,17 +198,14 @@ function Home() {
         )}
       </section>
 
-      {/* About Us Section */}
       <section id="about" className="pt-4 pb-12 sm:pt-6 sm:pb-16 md:pt-8 md:pb-20 bg-gradient-to-b from-white via-primary-50/20 to-white w-full relative overflow-hidden">
-        {/* Decorative Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-10 left-10 w-48 h-48 bg-primary-200/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-64 h-64 bg-yellow-200/10 rounded-full blur-3xl"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Section Header */}
-          <div className="text-center mb-6 sm:mb-8" data-aos="fade-up">
+          <div className="text-center mb-6 sm:mb-8">
             <div className="inline-block mb-1.5">
               <span className="text-primary-600 text-[10px] sm:text-xs font-bold uppercase tracking-widest">Who We Are</span>
             </div>
@@ -575,14 +217,10 @@ function Home() {
             <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-primary-500 to-transparent mx-auto"></div>
           </div>
           
-          {/* Main Content with Side Elements */}
           <div className="mx-auto">
             <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-              {/* Left Side Enhancement */}
-              <div className="hidden lg:block lg:col-span-2 space-y-4" data-aos="fade-right" data-aos-delay="150">
-                {/* Community Card - Yellow */}
-                <div className="group relative bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-4 border-2 border-yellow-200/60 shadow-lg hover:shadow-2xl hover:shadow-yellow-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-aos="zoom-in" data-aos-delay="200">
-                  {/* Animated Background Pattern */}
+              <div className="hidden lg:block lg:col-span-2 space-y-4">
+                <div className="group relative bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-4 border-2 border-yellow-200/60 shadow-lg hover:shadow-2xl hover:shadow-yellow-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
                     <div className="absolute inset-0" style={{
                       backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23eab308' fill-opacity='0.4'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h18v-2H22zm0 0v2H0v-2h20z'/%3E%3C/g%3E%3C/svg%3E")`,
@@ -600,9 +238,7 @@ function Home() {
                   </div>
                 </div>
                 
-                {/* Impact Card - Dark Blue/Primary */}
-                <div className="group relative bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-4 border-2 border-primary-200/60 shadow-lg hover:shadow-2xl hover:shadow-primary-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-aos="zoom-in" data-aos-delay="250">
-                  {/* Animated Background Pattern */}
+                <div className="group relative bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-4 border-2 border-primary-200/60 shadow-lg hover:shadow-2xl hover:shadow-primary-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
                     <div className="absolute inset-0" style={{
                       backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231A4B8A' fill-opacity='0.4'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h18v-2H22zm0 0v2H0v-2h20z'/%3E%3C/g%3E%3C/svg%3E")`,
@@ -621,15 +257,12 @@ function Home() {
                 </div>
               </div>
 
-              {/* Main Content Card */}
-              <div className="lg:col-span-8" data-aos="fade-up" data-aos-delay="100">
+              <div className="lg:col-span-8">
                 <div className="relative">
-                  {/* Decorative Corner Elements */}
                   <div className="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-primary-400 rounded-tl-xl opacity-30"></div>
                   <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-primary-400 rounded-br-xl opacity-30"></div>
                   
                   <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl border border-white/50 relative overflow-hidden">
-                {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
                   <div className="absolute inset-0" style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231A4B8A' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -638,8 +271,7 @@ function Home() {
                 </div>
                 
                 <div className="relative z-10">
-                  {/* Main Statement */}
-                  <div className="mb-6 sm:mb-8" data-aos="fade-up" data-aos-delay="150">
+                  <div className="mb-6 sm:mb-8">
                     <div className="flex items-start gap-3 mb-3">
                       <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
                         <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -648,19 +280,17 @@ function Home() {
                       </div>
                       <p className="text-base sm:text-lg md:text-xl text-gray-800 leading-relaxed font-bold">
                         <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
-                          Well-Ed Foundation was created with a simple intention — to stand with people where they are.
+                          Well-Ed Foundation was created with a simple intention � to stand with people where they are.
                         </span>
                       </p>
                     </div>
                   </div>
                   
-                  {/* Description */}
-                  <div className="mb-6 sm:mb-8 space-y-4" data-aos="fade-up" data-aos-delay="200">
+                  <div className="mb-6 sm:mb-8 space-y-4">
                     <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                       We understand that health is often not ignored by choice. For many individuals and families, it takes a back seat because daily responsibilities are heavy, resources are limited, and reliable guidance is hard to find. We understand the confusion, the hesitation, and the quiet concerns people carry about their well-being.
                     </p>
                     
-                    {/* Expandable Content */}
                     {isAboutExpanded && (
                       <div className="space-y-4 transition-all duration-500 ease-in-out">
                         <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
@@ -673,7 +303,6 @@ function Home() {
                       </div>
                     )}
                     
-                    {/* Know More Button */}
                     <div className="flex justify-start pt-2">
                       <button
                         onClick={() => setIsAboutExpanded(!isAboutExpanded)}
@@ -692,8 +321,7 @@ function Home() {
                     </div>
                   </div>
                   
-                  {/* Divider with Icon */}
-                  <div className="flex items-center gap-3 my-6 sm:my-8" data-aos="fade-up" data-aos-delay="250">
+                  <div className="flex items-center gap-3 my-6 sm:my-8">
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary-300 to-transparent"></div>
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-lg transform -rotate-6">
                       <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -703,15 +331,14 @@ function Home() {
                     <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary-300 to-transparent"></div>
                   </div>
                   
-                  {/* Well-Ed Definition */}
-                  <div className="bg-gradient-to-br from-primary-50 via-yellow-50/50 to-primary-50 rounded-xl p-5 sm:p-6 md:p-8 border-2 border-primary-200/50 shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                  <div className="bg-gradient-to-br from-primary-50 via-yellow-50/50 to-primary-50 rounded-xl p-5 sm:p-6 md:p-8 border-2 border-primary-200/50 shadow-lg">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-1.5 h-1.5 bg-primary-600 rounded-full animate-pulse"></div>
                       <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-800">Our Name, Our Promise</h3>
                     </div>
                     <div className="space-y-3">
                       <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed font-semibold">
-                        <span className="text-lg sm:text-xl md:text-2xl font-extrabold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">Well-Ed</span> stands for <span className="text-primary-700 font-bold">Wellness Education</span> — education that supports, not overwhelms.
+                        <span className="text-lg sm:text-xl md:text-2xl font-extrabold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">Well-Ed</span> stands for <span className="text-primary-700 font-bold">Wellness Education</span> � education that supports, not overwhelms.
                       </p>
                       <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed font-semibold">
                         It reflects our promise to guide without judgment and to help without conditions.
@@ -723,11 +350,8 @@ function Home() {
             </div>
               </div>
 
-              {/* Right Side Enhancement */}
-              <div className="hidden lg:block lg:col-span-2 space-y-4" data-aos="fade-left" data-aos-delay="150">
-                {/* Education Card - Green */}
-                <div className="group relative bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border-2 border-green-200/60 shadow-lg hover:shadow-2xl hover:shadow-green-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-aos="zoom-in" data-aos-delay="200">
-                  {/* Animated Background Pattern */}
+              <div className="hidden lg:block lg:col-span-2 space-y-4">
+                <div className="group relative bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 border-2 border-green-200/60 shadow-lg hover:shadow-2xl hover:shadow-green-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
                     <div className="absolute inset-0" style={{
                       backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2322c55e' fill-opacity='0.4'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h18v-2H22zm0 0v2H0v-2h20z'/%3E%3C/g%3E%3C/svg%3E")`,
@@ -745,9 +369,7 @@ function Home() {
                   </div>
                 </div>
                 
-                {/* Care Card - Light Blue */}
-                <div className="group relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border-2 border-blue-200/60 shadow-lg hover:shadow-2xl hover:shadow-blue-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-aos="zoom-in" data-aos-delay="250">
-                  {/* Animated Background Pattern */}
+                <div className="group relative bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border-2 border-blue-200/60 shadow-lg hover:shadow-2xl hover:shadow-blue-200/50 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
                     <div className="absolute inset-0" style={{
                       backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233b82f6' fill-opacity='0.4'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h18v-2H22zm0 0v2H0v-2h20z'/%3E%3C/g%3E%3C/svg%3E")`,
@@ -768,14 +390,10 @@ function Home() {
             </div>
           </div>
           
-          {/* Two Cards Row */}
-          <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6" data-aos="fade-up" data-aos-delay="350">
-            {/* Our Mission Card */}
-            <div className="group relative bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-5 shadow-lg border border-primary-200/50 hover:shadow-xl transition-all duration-300 overflow-hidden" data-aos="fade-right" data-aos-delay="400">
-              {/* Top Accent Bar */}
+          <div className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="group relative bg-white/90 backdrop-blur-sm rounded-xl p-4 md:p-5 shadow-lg border border-primary-200/50 hover:shadow-xl transition-all duration-300 overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700"></div>
               
-              {/* Icon */}
               <div className="mb-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -793,14 +411,11 @@ function Home() {
               </p>
             </div>
 
-            {/* Our Commitment Card */}
-            <div className="group relative bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl p-4 md:p-5 shadow-lg text-white hover:shadow-xl transition-all duration-300 overflow-hidden" data-aos="fade-left" data-aos-delay="400">
-              {/* Decorative Background */}
+            <div className="group relative bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl p-4 md:p-5 shadow-lg text-white hover:shadow-xl transition-all duration-300 overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
               
               <div className="relative z-10">
-                {/* Icon */}
                 <div className="mb-3">
                   <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-md transform group-hover:scale-110 transition-transform duration-300">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -814,14 +429,13 @@ function Home() {
                   At Well-Ed Foundation, wellness is inclusive and compassionate.
                 </p>
                 <p className="text-xs sm:text-sm leading-relaxed opacity-95">
-                  We are committed to walking alongside individuals and communities — listening, learning, and supporting them — because wellness should never be selective, and no one should feel alone on their journey to better health.
+                  We are committed to walking alongside individuals and communities � listening, learning, and supporting them � because wellness should never be selective, and no one should feel alone on their journey to better health.
                 </p>
               </div>
             </div>
           </div>
           
-          {/* Bottom Decorative Elements */}
-          <div className="mt-8 sm:mt-10 flex justify-center gap-3" data-aos="fade-up" data-aos-delay="400">
+          <div className="mt-8 sm:mt-10 flex justify-center gap-3">
             <div className="w-2 h-2 bg-primary-400 rounded-full"></div>
             <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
             <div className="w-2 h-2 bg-primary-400 rounded-full"></div>
@@ -829,28 +443,23 @@ function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section id="impact" className="py-8 md:py-10 bg-gradient-to-br from-primary-50 via-yellow-50/40 to-primary-50 relative w-full overflow-hidden">
-        {/* Attractive Background Pattern */}
         <div className="absolute inset-0 bg-grid-pattern opacity-8"></div>
         
-        {/* Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary-100/30 via-transparent to-yellow-100/30"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
         
-        {/* Animated Blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-10 left-10 w-40 h-40 bg-primary-200/40 rounded-full blur-3xl animate-float"></div>
           <div className="absolute bottom-10 right-10 w-48 h-48 bg-yellow-200/40 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-success-200/20 rounded-full blur-2xl animate-pulse-slow"></div>
         </div>
         
-        {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-400 to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-6 md:mb-8" data-aos="fade-up">
+          <div className="text-center mb-6 md:mb-8">
             <div className="inline-block mb-2 px-3 py-1 bg-gray-800 rounded-full shadow-md transform hover:scale-105 transition-transform duration-300">
               <span className="text-[10px] font-bold text-white uppercase tracking-wider">Making a Difference</span>
             </div>
@@ -865,7 +474,6 @@ function Home() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {STATS.map((stat, index) => {
-              // Color themes for each card
               const themes = [
                 { gradient: 'from-yellow-400 via-yellow-500 to-yellow-600', bg: 'from-yellow-50 to-yellow-100', border: 'border-yellow-300', text: 'text-yellow-700', shadow: 'shadow-yellow-300/50' },
                 { gradient: 'from-primary-600 via-primary-700 to-primary-800', bg: 'from-primary-50 to-primary-100', border: 'border-primary-300', text: 'text-primary-700', shadow: 'shadow-primary-300/50' },
@@ -878,31 +486,22 @@ function Home() {
                 <div 
                   key={index} 
                   className="group relative bg-white/90 backdrop-blur-sm rounded-xl p-2 md:p-3 text-center border-2 border-white/60 hover:border-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 overflow-hidden"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
                 >
-                  {/* Animated Gradient Background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${theme.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                   
-                  {/* Top Gradient Bar - Always Visible */}
                   <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${theme.gradient} shadow-md`}></div>
                   
-                  {/* Animated Border Glow */}
                   <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${theme.gradient} opacity-0 group-hover:opacity-15 blur-md transition-opacity duration-500`}></div>
                   
-                  {/* Decorative Corner Elements */}
                   <div className={`absolute top-1.5 right-1.5 w-2 h-2 border-t-2 border-r-2 ${theme.border} rounded-tr-md opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                   <div className={`absolute bottom-1.5 left-1.5 w-2 h-2 border-b-2 border-l-2 ${theme.border} rounded-bl-md opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                   
-                  {/* Floating Particles */}
                   <div className="absolute top-3 right-3 w-1 h-1 bg-primary-300 rounded-full opacity-0 group-hover:opacity-60 animate-pulse"></div>
                   <div className="absolute bottom-3 left-3 w-0.5 h-0.5 bg-primary-400 rounded-full opacity-0 group-hover:opacity-40 animate-pulse" style={{ animationDelay: '0.3s' }}></div>
                   
                   <div className="relative z-10">
-                    {/* Icon Container with Animation */}
                     <div className="relative mb-2 flex justify-center">
                       <div className={`w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br ${theme.gradient} rounded-lg flex items-center justify-center shadow-xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 relative overflow-hidden border border-white/50`}>
-                        {/* Shimmer Effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
                         <svg className="w-5 h-5 md:w-6 md:h-6 text-white transform group-hover:scale-110 transition-transform duration-500 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
                           {index === 0 && (
@@ -924,21 +523,17 @@ function Home() {
                       </div>
                     </div>
                     
-                    {/* Number with Counter Animation Effect */}
                     <div className="mb-1">
                       <div className={`text-xl md:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r ${theme.gradient} bg-clip-text text-transparent mb-1 transform group-hover:scale-105 transition-transform duration-300`}>
                         {stat.number}
                       </div>
-                      {/* Animated Underline - Always Visible */}
                       <div className={`h-0.5 bg-gradient-to-r ${theme.gradient} w-full mx-auto rounded-full`}></div>
                     </div>
                     
-                    {/* Label */}
                     <div className={`text-[9px] md:text-[10px] font-bold ${theme.text} uppercase tracking-wider mb-1 transform group-hover:translate-y-[-1px] transition-transform duration-300`}>
                       {stat.label}
                     </div>
                     
-                    {/* Progress Indicator (appears on hover) */}
                     <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <div className={`w-1 h-1 rounded-full bg-gradient-to-r ${theme.gradient} animate-pulse`}></div>
@@ -951,7 +546,6 @@ function Home() {
                     </div>
                   </div>
                   
-                  {/* Glow Effect on Hover */}
                   <div className={`absolute inset-0 rounded-xl ${theme.shadow} opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 -z-10`}></div>
                 </div>
               );
@@ -960,11 +554,9 @@ function Home() {
         </div>
       </section>
 
-      {/* Our Programmes Section - Full Width Creative Design */}
       <section id="work" className="pt-4 md:pt-6 pb-20 md:pb-28 bg-white w-full" style={{ backgroundColor: '#ffffff' }}>
         <div className="w-full">
-          {/* Header */}
-          <div className="text-center mb-16 md:mb-20" data-aos="fade-up">
+          <div className="text-center mb-16 md:mb-20">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 text-blue-900">
               Our Programmes
             </h2>
@@ -978,23 +570,20 @@ function Home() {
             </p>
           </div>
           
-          {/* Program Cards - 3 Column Grid Layout */}
           <div className="w-full relative">
-            {/* Left Decorative Elements */}
             <div className="hidden lg:flex absolute left-4 top-0 bottom-0 w-48 items-center justify-center pointer-events-none z-0">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 via-blue-100/40 to-cyan-100/50 rounded-3xl blur-2xl"></div>
-                <div className="relative text-8xl opacity-25">📚</div>
+                <div className="relative text-8xl opacity-25">??</div>
                 <div className="absolute top-10 left-10 w-24 h-24 bg-indigo-200/30 rounded-full blur-xl"></div>
                 <div className="absolute bottom-10 right-10 w-20 h-20 bg-cyan-200/30 rounded-full blur-xl"></div>
               </div>
             </div>
             
-            {/* Right Decorative Elements */}
             <div className="hidden lg:flex absolute right-4 top-0 bottom-0 w-48 items-center justify-center pointer-events-none z-0">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-100/50 via-purple-100/40 to-rose-100/50 rounded-3xl blur-2xl"></div>
-                <div className="relative text-8xl opacity-25">💡</div>
+                <div className="relative text-8xl opacity-25">??</div>
                 <div className="absolute top-10 right-10 w-24 h-24 bg-violet-200/30 rounded-full blur-xl"></div>
                 <div className="absolute bottom-10 left-10 w-20 h-20 bg-rose-200/30 rounded-full blur-xl"></div>
               </div>
@@ -1002,14 +591,13 @@ function Home() {
             
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 relative z-10">
               {PROGRAMS.map((program, index) => {
-                // Mood board color palette - Yellow, Dark Blue, Light Blue, Green
                 const colorGradients = [
                   'from-blue-700 via-blue-800 to-blue-900', // Dark Blue - Educational Bridge
                   'from-yellow-400 via-yellow-500 to-yellow-600', // Bright Yellow - Digital Literacy
                   'from-blue-400 via-blue-500 to-blue-600', // Light Blue - Health & Wellness
                   'from-green-400 via-green-500 to-green-600', // Bright Green - Nutrition
                   'from-yellow-500 via-yellow-600 to-amber-500', // Yellow variant - Mobile Library
-                  'from-emerald-500 via-green-600 to-teal-600' // Green shade - Mentorship
+                  'from-emerald-500 via-green-600 to-teal-600'
                 ]
                 const bgGradients = [
                   'from-blue-50 via-blue-100/70 to-white',
@@ -1020,29 +608,22 @@ function Home() {
                   'from-emerald-50 via-green-100/70 to-white'
                 ]
                 
-                // Clean SVG icons for each program
                 const programIcons = [
-                  // 0: Educational Bridge - Book/Education icon
                   <svg key="education" className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>,
-                  // 1: Digital Literacy - Laptop/Computer icon
                   <svg key="digital" className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>,
-                  // 2: Health & Wellness - Heart/Health icon
                   <svg key="health" className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                   </svg>,
-                  // 3: Nutrition - Food/Meal icon
                   <svg key="nutrition" className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>,
-                  // 4: Mobile Library - Book stack icon
                   <svg key="library" className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>,
-                  // 5: Mentorship - Users/People icon
                   <svg key="mentorship" className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
@@ -1052,27 +633,17 @@ function Home() {
                   <div 
                     key={index}
                     className="relative group h-full"
-                    data-aos="fade-up"
-                    data-aos-delay={index * 100}
                   >
-                    {/* Background Card with Gradient */}
                     <div className={`relative h-full rounded-2xl overflow-hidden bg-gradient-to-br ${bgGradients[index]} border-2 border-white/80 shadow-lg hover:shadow-xl transition-all duration-700 transform hover:-translate-y-1 flex flex-col`}>
-                      {/* Animated Gradient Overlay */}
                       <div className={`absolute inset-0 bg-gradient-to-r ${colorGradients[index]} opacity-0 group-hover:opacity-10 transition-opacity duration-700`}></div>
                       
-                      {/* Top Accent Line */}
                       <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colorGradients[index]} shadow-md`}></div>
                       
-                      {/* Content Container */}
                       <div className="relative flex flex-col items-center text-center gap-2 md:gap-3 p-3 md:p-4 flex-grow">
-                        {/* Icon Section */}
                         <div className="flex-shrink-0 relative">
-                          {/* Floating Icon Container */}
                           <div className="relative">
-                            {/* Outer Glow Ring */}
                             <div className={`absolute inset-0 bg-gradient-to-r ${colorGradients[index]} rounded-full blur-2xl opacity-30 group-hover:opacity-50 group-hover:scale-150 transition-all duration-700`}></div>
                             
-                            {/* Icon Blob Container */}
                             <div 
                               className={`relative w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br ${colorGradients[index]} flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-700 shadow-xl border-2 border-white/50 mx-auto`}
                               style={{
@@ -1084,26 +655,21 @@ function Home() {
                                               '45% 55% 55% 45% / 55% 45% 55% 45%'
                               }}
                             >
-                              {/* Icon with Animation */}
                               <div className="relative z-10 transform group-hover:scale-125 transition-transform duration-700">
                                 {programIcons[index]}
                               </div>
                               
-                              {/* Inner Glow */}
                               <div 
                                 className={`absolute inset-3 bg-gradient-to-br ${colorGradients[index]} opacity-30 blur-xl rounded-full`}
                               ></div>
                               
-                              {/* Floating Particles */}
                               <div className={`absolute -top-2 -right-2 w-3 h-3 bg-gradient-to-br ${colorGradients[index]} rounded-full opacity-60 group-hover:animate-ping`}></div>
                               <div className={`absolute -bottom-2 -left-2 w-2 h-2 bg-gradient-to-br ${colorGradients[index]} rounded-full opacity-40 group-hover:animate-ping`} style={{ animationDelay: '0.3s' }}></div>
                             </div>
                           </div>
                         </div>
                         
-                        {/* Content Section */}
                         <div className="flex-1 flex flex-col items-center justify-between w-full">
-                          {/* Program Number Badge */}
                           <div className="inline-flex items-center gap-1.5 mb-2 px-2 py-0.5 bg-white/80 backdrop-blur-sm rounded-full shadow-md">
                             <span className={`text-[10px] font-black bg-gradient-to-r ${colorGradients[index]} bg-clip-text text-transparent`}>
                               #{String(index + 1).padStart(2, '0')}
@@ -1111,17 +677,14 @@ function Home() {
                             <div className={`w-0.5 h-0.5 rounded-full bg-gradient-to-r ${colorGradients[index]}`}></div>
                           </div>
                           
-                          {/* Title */}
                           <h3 className={`text-sm md:text-base lg:text-base font-extrabold mb-1.5 md:mb-2 bg-gradient-to-r ${colorGradients[index]} bg-clip-text text-transparent leading-tight`}>
                             {program.title}
                           </h3>
                           
-                          {/* Description */}
                           <p className="text-[10px] md:text-xs text-gray-700 leading-relaxed font-medium mb-2 flex-grow">
                             {program.detail}
                           </p>
                           
-                          {/* Decorative Line */}
                           <div className="flex items-center justify-center gap-1.5 w-full mt-auto">
                             <div className={`w-6 h-0.5 bg-gradient-to-r ${colorGradients[index]} rounded-full`}></div>
                             <div className={`w-1.5 h-1.5 bg-gradient-to-r ${colorGradients[index]} rounded-full`}></div>
@@ -1130,7 +693,6 @@ function Home() {
                         </div>
                       </div>
                       
-                      {/* Bottom Shine Effect */}
                       <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
                     </div>
                   </div>
@@ -1139,8 +701,7 @@ function Home() {
             </div>
           </div>
           
-          {/* Bottom Decorative Elements */}
-          <div className="flex justify-center items-center gap-4 mt-12 md:mt-16" data-aos="fade-up" data-aos-delay="600">
+          <div className="flex justify-center items-center gap-4 mt-12 md:mt-16">
             <div className="w-3 h-3 bg-indigo-600 rounded-full animate-pulse"></div>
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-indigo-600 to-transparent"></div>
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
@@ -1150,29 +711,22 @@ function Home() {
         </div>
       </section>
 
-
-      {/* Impact Stories Carousel Section - New Modern Design */}
       <section id="stories" className="pt-6 md:pt-8 pb-8 md:pb-10 lg:pb-12 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden w-full border-2 border-yellow-400">
-        {/* Subtle Background Elements - Professional NGO Feel */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Soft, Gentle Background Blobs */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-100/25 rounded-full blur-3xl"></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-50/30 rounded-full blur-3xl"></div>
         </div>
         
-        {/* Subtle Texture Overlay */}
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22%231A4B8A%22 fill-opacity=%220.4%22%3E%3Cpath d=%22M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z%22/%3E%3C/g%3E%3C/svg%3E')]"></div>
         </div>
         
-        {/* Simple Border Accents */}
         <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary-300/40 to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-yellow-300/40 to-transparent"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-4 md:mb-6" data-aos="fade-up">
+          <div className="text-center mb-4 md:mb-6">
             <div className="inline-block mb-1">
               <span className="text-primary-600 text-[10px] sm:text-xs font-bold uppercase tracking-widest">Real Impact</span>
             </div>
@@ -1191,7 +745,6 @@ function Home() {
             </p>
           </div>
 
-          {/* Carousel */}
           <div 
             className="relative"
             onTouchStart={onTouchStart}
@@ -1209,15 +762,12 @@ function Home() {
                     : 'opacity-0 scale-95 absolute inset-0 pointer-events-none'
                 }`}
               >
-                {/* Main Story Card - Creative Design */}
                 <div className={`bg-white rounded-xl lg:rounded-2xl shadow-2xl overflow-hidden border border-gray-200 max-w-4xl mx-auto group hover:shadow-3xl transition-all duration-500 ${
                   isActive ? 'animate-[fadeInUp_0.6s_ease-out]' : ''
                 }`}>
-                  {/* Animated Gradient Border */}
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-yellow-400 to-primary-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10 blur-xl"></div>
                   
                   <div className="grid md:grid-cols-5 gap-0 relative">
-                    {/* Left Side - Image with Creative Effects */}
                     <div className={`relative order-1 md:col-span-2 overflow-hidden aspect-square md:aspect-[4/5] group/image ${
                       index % 2 === 0 ? '' : 'md:order-2'
                     } ${
@@ -1230,11 +780,9 @@ function Home() {
                         loading="lazy"
                       />
                       
-                      {/* Decorative Corner Accents */}
                       <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-yellow-400/30 to-transparent"></div>
                       <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-primary-600/30 to-transparent"></div>
                       
-                      {/* Floating Badge on Image */}
                       <div className={`absolute top-4 left-4 transform rotate-[-5deg] ${
                         isActive ? 'animate-[zoomIn_0.5s_ease-out_0.3s_both]' : ''
                       }`}>
@@ -1246,24 +794,20 @@ function Home() {
                       </div>
                     </div>
                     
-                    {/* Right Side - Content with Creative Styling */}
                     <div className={`p-4 md:p-5 lg:p-6 flex flex-col justify-center md:col-span-3 relative ${
                       index % 2 === 0 ? 'order-2' : 'order-1'
                     } ${isActive ? (index % 2 === 0 ? 'animate-[fadeInRight_0.7s_ease-out_0.2s_both]' : 'animate-[fadeInLeft_0.7s_ease-out_0.2s_both]') : ''}`}>
-                      {/* Decorative Background Pattern */}
                       <div className="absolute inset-0 opacity-5">
                         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%231A4B8A%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
                       </div>
                       
                       <div className="relative z-10">
-                        {/* Quote Icon */}
                         <div className={`mb-4 ${isActive ? 'animate-[fadeInUp_0.5s_ease-out_0.3s_both]' : ''}`}>
                           <svg className="w-8 h-8 text-primary-200" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                           </svg>
                         </div>
                         
-                        {/* Name & Title */}
                         <div className={`mb-4 ${isActive ? 'animate-[fadeInUp_0.5s_ease-out_0.35s_both]' : ''}`}>
                           <h4 className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 mb-3 leading-tight">
                             <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
@@ -1272,7 +816,6 @@ function Home() {
                             <span className="text-gray-700">, {story.title}</span>
                           </h4>
                           
-                          {/* Creative Divider */}
                           <div className={`flex items-center gap-2 mb-4 ${isActive ? 'animate-[fadeInRight_0.6s_ease-out_0.4s_both]' : ''}`}>
                             <div className="h-1 w-12 bg-gradient-to-r from-primary-600 to-yellow-400 rounded-full"></div>
                             <div className="h-1 w-1 bg-yellow-400 rounded-full"></div>
@@ -1280,12 +823,10 @@ function Home() {
                           </div>
                         </div>
                         
-                        {/* Description */}
                         <p className={`text-gray-700 text-sm sm:text-base leading-relaxed mb-5 font-medium ${isActive ? 'animate-[fadeInUp_0.6s_ease-out_0.45s_both]' : ''}`}>
                           {story.description}
                         </p>
                         
-                        {/* Badge with Creative Design */}
                         <div className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-primary-50 to-yellow-50 border-2 border-primary-200 shadow-md hover:shadow-lg transition-shadow duration-300 group/badge ${isActive ? 'animate-[fadeInUp_0.5s_ease-out_0.5s_both]' : ''}`}>
                           <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
                           <span className="text-xs font-black text-primary-700 uppercase tracking-widest">
@@ -1297,19 +838,16 @@ function Home() {
                         </div>
                       </div>
                       
-                      {/* Decorative Bottom Accent */}
                       <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-primary-100/50 to-transparent rounded-tl-full"></div>
                     </div>
                   </div>
                   
-                  {/* Animated Corner Decorations */}
                   <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
             )})}
             
-            {/* Navigation Arrows */}
             <button
               onClick={prevStory}
               className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition-all duration-300 z-20 border border-gray-200 hover:border-primary-300 group"
@@ -1329,8 +867,7 @@ function Home() {
               </svg>
             </button>
             
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 sm:gap-3 mt-6 md:mt-8" data-aos="fade-up" data-aos-delay="550" data-aos-duration="500">
+            <div className="flex justify-center gap-2 sm:gap-3 mt-6 md:mt-8">
               {impactStories.map((_, index) => (
                 <button
                   key={index}
@@ -1348,10 +885,9 @@ function Home() {
         </div>
       </section>
 
-      {/* Contact Us Section */}
       <section id="contact" className="py-8 sm:py-10 md:py-12 lg:py-16 bg-gray-50 relative w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8 md:mb-10" data-aos="fade-up">
+          <div className="text-center mb-6 sm:mb-8 md:mb-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 md:mb-3">Get in Touch</h2>
             <div className="w-16 sm:w-20 h-0.5 bg-blue-900 mx-auto rounded-full mb-2"></div>
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -1360,10 +896,8 @@ function Home() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
-            {/* Contact Form */}
             <div 
               className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-5 lg:p-6 border border-gray-200"
-              data-aos="fade-right"
             >
               <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-3">
                 <div className="w-10 h-10 sm:w-11 sm:h-11 bg-blue-900 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
@@ -1499,12 +1033,10 @@ function Home() {
               </form>
             </div>
 
-            {/* Contact Information */}
             <div 
               className="space-y-3 sm:space-y-4 md:space-y-5"
-              data-aos="fade-left"
             >
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 lg:p-7 border border-gray-200" data-aos="fade-up" data-aos-delay="200">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-6 lg:p-7 border border-gray-200">
                 <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-900 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1549,7 +1081,7 @@ function Home() {
                 </div>
               </div>
 
-              <div className="bg-blue-900 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-7 text-white shadow-lg" data-aos="fade-up" data-aos-delay="300">
+              <div className="bg-blue-900 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 lg:p-7 text-white shadow-lg">
                 <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1598,11 +1130,9 @@ function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   )
 }
 
 export default Home
-

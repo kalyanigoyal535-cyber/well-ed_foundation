@@ -2,16 +2,14 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
-import AOS from 'aos'
 
 function Funds() {
   const location = useLocation()
   
-  // Sample data - replace with actual data from API/database
   const fundsData = {
-    totalReceived: 12500000, // ₹1.25 Crores
-    totalUsed: 9800000, // ₹98 Lakhs
-    availableBalance: 2700000, // ₹27 Lakhs
+    totalReceived: 12500000,
+    totalUsed: 9800000,
+    availableBalance: 2700000,
     monthlyReceived: [
       { month: 'Jan 2024', amount: 850000 },
       { month: 'Feb 2024', amount: 920000 },
@@ -57,23 +55,9 @@ function Funds() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false,
-      offset: 100,
-    })
-    const timer = setTimeout(() => {
-      if (window.AOS) {
-        window.AOS.refresh()
-      }
-    }, 100)
-    return () => clearTimeout(timer)
   }, [location.pathname])
 
   const usagePercentage = (fundsData.totalUsed / fundsData.totalReceived) * 100
-  const remainingPercentage = 100 - usagePercentage
 
   return (
     <div className="bg-gray-50 overflow-x-hidden w-full max-w-full">
@@ -81,8 +65,7 @@ function Funds() {
       <section className="py-24 bg-gray-50 pt-32 w-full max-w-full">
         <div className="max-w-7xl mx-auto w-full overflow-x-hidden px-4 sm:px-6 lg:px-8">
           
-          {/* Header Section */}
-          <div className="text-center mb-12 sm:mb-16" data-aos="fade-up">
+          <div className="text-center mb-12 sm:mb-16">
             <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
               <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent via-primary-400 to-primary-500"></div>
               <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
@@ -103,9 +86,7 @@ function Funds() {
             </div>
           </div>
 
-          {/* Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" data-aos="fade-up" data-aos-delay="100">
-            {/* Total Received */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow-lg border-2 border-green-200 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-green-200/20 rounded-full blur-3xl"></div>
               <div className="relative z-10">
@@ -120,7 +101,6 @@ function Funds() {
               </div>
             </div>
 
-            {/* Total Used */}
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow-lg border-2 border-blue-200 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200/20 rounded-full blur-3xl"></div>
               <div className="relative z-10">
@@ -135,7 +115,6 @@ function Funds() {
               </div>
             </div>
 
-            {/* Available Balance */}
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 shadow-lg border-2 border-purple-200 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-200/20 rounded-full blur-3xl"></div>
               <div className="relative z-10">
@@ -151,8 +130,7 @@ function Funds() {
             </div>
           </div>
 
-          {/* Usage Breakdown */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12" data-aos="fade-up" data-aos-delay="200">
+          <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <div className="w-1.5 h-8 bg-gradient-to-b from-primary-500 to-primary-700 rounded-full"></div>
               Fund Utilization Breakdown
@@ -168,8 +146,6 @@ function Funds() {
                     <div
                       className="bg-gradient-to-r from-primary-500 to-primary-600 h-4 rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
                       style={{ width: `${item.percentage}%` }}
-                      data-aos="slide-right"
-                      data-aos-delay={300 + index * 100}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
                     </div>
@@ -180,8 +156,7 @@ function Funds() {
             </div>
           </div>
 
-          {/* Monthly Trends */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12" data-aos="fade-up" data-aos-delay="300">
+          <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
               <div className="w-1.5 h-8 bg-gradient-to-b from-primary-500 to-primary-700 rounded-full"></div>
               Monthly Funds Received (Last 6 Months)
@@ -196,8 +171,6 @@ function Funds() {
                       <div
                         className="w-full bg-gradient-to-t from-primary-600 to-primary-500 rounded-lg transition-all duration-1000 ease-out relative overflow-hidden"
                         style={{ height: `${heightPercentage}%` }}
-                        data-aos="slide-up"
-                        data-aos-delay={400 + index * 100}
                       >
                         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-transparent animate-shimmer"></div>
                       </div>
@@ -210,10 +183,8 @@ function Funds() {
             </div>
           </div>
 
-          {/* Recent Transactions */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-            {/* Recent Donations */}
-            <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="400">
+            <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
                 <div className="w-1.5 h-8 bg-gradient-to-b from-green-500 to-green-700 rounded-full"></div>
                 Recent Donations
@@ -236,8 +207,7 @@ function Funds() {
               </div>
             </div>
 
-            {/* Recent Expenses */}
-            <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="500">
+            <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
                 <div className="w-1.5 h-8 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
                 Recent Expenses
@@ -261,8 +231,7 @@ function Funds() {
             </div>
           </div>
 
-          {/* Transparency Note */}
-          <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-2xl p-6 sm:p-8 border-2 border-primary-200" data-aos="fade-up" data-aos-delay="600">
+          <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-2xl p-6 sm:p-8 border-2 border-primary-200">
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
                 <svg className="w-8 h-8 sm:w-10 sm:h-10 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -289,10 +258,6 @@ function Funds() {
 }
 
 export default Funds
-
-
-
-
 
 
 

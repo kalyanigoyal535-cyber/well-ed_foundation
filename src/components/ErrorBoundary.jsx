@@ -12,7 +12,6 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     console.error('Error caught by boundary:', error, errorInfo)
-    // Log to error tracking service if available
     if (window.console && window.console.error) {
       window.console.error('Error details:', {
         error: error.toString(),
@@ -61,5 +60,3 @@ class ErrorBoundary extends Component {
 }
 
 export default ErrorBoundary
-
-

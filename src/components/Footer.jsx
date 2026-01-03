@@ -4,7 +4,7 @@ import OptimizedImage from './OptimizedImage'
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 text-gray-700 py-6 sm:py-8 border-t border-gray-300 relative overflow-hidden w-full max-w-full" data-aos="fade-up">
+    <footer className="bg-gray-100 text-gray-700 py-6 sm:py-8 border-t border-gray-300 relative overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full">
         <div className="grid md:grid-cols-4 gap-4 mb-4">
           <div className="md:col-span-1">

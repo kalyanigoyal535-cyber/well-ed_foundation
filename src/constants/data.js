@@ -1,5 +1,3 @@
-// Shared constants and data for the application
-
 export const STATS = [
   { number: '2.5M+', label: 'Meals Served', icon: '🍽️' },
   { number: '50K+', label: 'Lives Impacted', icon: '❤️' },

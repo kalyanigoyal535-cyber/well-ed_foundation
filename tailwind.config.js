@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -8,12 +7,12 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f0f7ff', // Light pale blue from mood board
+          50: '#f0f7ff',
           100: '#e6f0f8',
           200: '#cce1f1',
           300: '#99c3e3',
           400: '#66a5d5',
-          500: '#1A4B8A', // Dark deep blue from mood board
+          500: '#1A4B8A',
           600: '#153d6f',
           700: '#102e53',
           800: '#0a1f38',
@@ -34,29 +33,27 @@ export default {
           950: '#0a0a0a',
         },
         accent: {
-          light: '#f0f7ff', // Light pale blue from mood board
-          DEFAULT: '#1A4B8A', // Dark deep blue from mood board
+          light: '#f0f7ff',
+          DEFAULT: '#1A4B8A',
           dark: '#102e53',
         },
-        // Vibrant medium green from mood board
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
           200: '#bbf7d0',
           300: '#86efac',
           400: '#4ade80',
-          500: '#22c55e', // Vibrant medium green
+          500: '#22c55e',
           600: '#16a34a',
           700: '#15803d',
         },
-        // Mood board colors
         moodboard: {
-          yellow: '#FFD700', // Bright sunny yellow
-          orange: '#FF6B35', // Vibrant orange
-          red: '#DC2626', // Deep rich red
-          green: '#22c55e', // Vibrant medium green
-          blue: '#1A4B8A', // Dark deep blue
-          lightBlue: '#f0f7ff', // Light pale blue
+          yellow: '#FFD700',
+          orange: '#FF6B35',
+          red: '#DC2626',
+          green: '#22c55e',
+          blue: '#1A4B8A',
+          lightBlue: '#f0f7ff',
         }
       },
       fontFamily: {
@@ -131,9 +128,3 @@ export default {
   },
   plugins: [],
 }
-
-
-
-
-
-

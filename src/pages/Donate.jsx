@@ -3,8 +3,6 @@ import { useLocation } from 'react-router-dom'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import { DONATION_TABS, PRESET_AMOUNTS, INDIAN_STATES } from '../constants/data'
-import { supabase } from '../lib/supabase'
-import { testDonationInsert, submitDonation } from '../utils/testDonationInsert'
 
 function Donate() {
   const location = useLocation()
@@ -43,34 +41,10 @@ function Donate() {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // 🧪 TEST FUNCTIONS: Make available globally for easy testing
-  // Call from browser console: window.testDonationInsert() or window.submitDonation()
   useEffect(() => {
-    window.testDonationInsert = testDonationInsert
-    window.submitDonation = submitDonation
-    console.log('🧪 Test functions available:')
-    console.log('   - window.testDonationInsert() - Full test with donations table')
-    console.log('   - window.submitDonation() - Simple test with donation_intents table')
-    
-    return () => {
-      delete window.testDonationInsert
-      delete window.submitDonation
-    }
-  }, [])
-
-  useEffect(() => {
-    // Scroll to top when page loads or route changes
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    // Refresh AOS after a short delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      if (window.AOS) {
-        window.AOS.refresh()
-      }
-    }, 100)
-    return () => clearTimeout(timer)
   }, [location.pathname])
 
-  // Memoize calculation to avoid recalculation on every render
   const calculateChildren = useCallback((amount) => {
     return Math.floor(amount / 4500)
   }, [])
@@ -81,7 +55,6 @@ function Donate() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }))
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev }
@@ -94,7 +67,6 @@ function Donate() {
   const handleAmountSelect = useCallback((amount) => {
     setDonationAmount(amount)
     setCustomAmount('')
-    // Clear amount error when selecting preset
     setErrors(prev => {
       if (prev.amount) {
         const newErrors = { ...prev }
@@ -108,13 +80,11 @@ function Donate() {
   const validateForm = useCallback(() => {
     const newErrors = {}
     
-    // Validate donation amount
     const amount = parseInt(donationAmount || customAmount) || 0
     if (amount <= 0) {
       newErrors.amount = 'Please enter a valid donation amount'
     }
     
-    // Validate required fields with safety checks
     if (!formData.name || !formData.name.trim()) {
       newErrors.name = 'Name is required'
     }
@@ -149,7 +119,6 @@ function Donate() {
       newErrors.state = 'State is required'
     }
     
-    // Validate tab-specific fields
     if (activeTab === 'honor' && (!formData.honorName || !formData.honorName.trim())) {
       newErrors.honorName = 'Name is required for honor donation'
     }
@@ -167,9 +136,7 @@ function Donate() {
     
     const isValid = validateForm()
     if (!isValid) {
-      // Scroll to first error after state update
       setTimeout(() => {
-        // Get the first error field from the DOM or use a ref
         const errorElements = document.querySelectorAll('[class*="border-red"]')
         if (errorElements.length > 0) {
           errorElements[0].scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -182,85 +149,18 @@ function Donate() {
     setIsSubmitting(true)
     
     try {
-      // Calculate donation amount
-      const amount = parseInt(donationAmount || customAmount) || 0
-      
-      // Prepare donation data
-      const donationData = {
-        donation_type: activeTab,
-        amount: amount,
-        title: formData.title,
-        name: formData.name,
-        email: formData.email,
-        dob: formData.dob || null,
-        mobile: formData.mobile,
-        whatsapp: formData.whatsapp,
-        alternate_mobile: formData.alternateMobile || null,
-        pan: formData.pan || null,
-        address: formData.address,
-        pincode: formData.pincode,
-        city: formData.city,
-        state: formData.state,
-        province: formData.province || null,
-        preference_state: formData.preferenceState || null,
-        want_80g: formData.want80G,
-        // Honor donation fields
-        honor_name: formData.honorName || null,
-        honor_occasion: formData.honorOccasion || null,
-        honor_date: formData.honorDate || null,
-        // Memory donation fields
-        memory_name: formData.memoryName || null,
-        // Occasion donation fields
-        occasion_type: formData.occasionType || null,
-        occasion_date: formData.occasionDate || null,
-        // SME donation fields
-        company_name: formData.companyName || null,
-        company_type: formData.companyType || null,
-        gstin: formData.gstin || null,
-        // School donation fields
-        school_name: formData.schoolName || null,
-        school_location: formData.schoolLocation || null,
-        donor_type: donorType,
-        status: 'pending', // pending, completed, failed
-        created_at: new Date().toISOString(),
-      }
-
-      // Save to Supabase (only if configured)
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-      
-      if (supabaseUrl && supabaseAnonKey) {
-        const { data, error } = await supabase
-          .from('donations')
-          .insert([donationData])
-          .select()
-
-        if (error) {
-          console.error('Error saving donation:', error)
-          throw error
-        }
-
-        console.log('Donation saved successfully:', data)
-      } else {
-        console.warn('Supabase not configured - donation data not saved to database')
-        // In production, you might want to send this to an alternative endpoint
-      }
-      
-      // Payment gateway integration will go here
-      // For now, show success message
-      alert('Thank you for your donation! Your information has been saved. You will be redirected to the payment gateway.')
-      // Redirect to payment gateway
-      // TODO: Integrate payment gateway (Razorpay, Stripe, etc.)
+      // Form is valid, proceed with submission
+      // In a production environment, you would redirect to a payment gateway here
+      alert('Thank you for your donation! You will be redirected to the payment gateway.')
       
     } catch (error) {
       console.error('Error submitting donation:', error)
-      alert('An error occurred while saving your donation. Please try again or contact support.')
+      alert('An error occurred while submitting your donation. Please try again or contact support.')
     } finally {
       setIsSubmitting(false)
     }
   }, [validateForm, donationAmount, customAmount, activeTab, formData, donorType])
 
-  // Memoize current donation amount calculation
   const currentAmount = useMemo(() => {
     return parseInt(donationAmount || customAmount) || 0
   }, [donationAmount, customAmount])
@@ -274,15 +174,13 @@ function Donate() {
           <Navigation />
           <section className="py-16 sm:py-20 md:py-24 bg-gray-50 pt-24 sm:pt-28 md:pt-32 w-full max-w-full">
             <div className="max-w-7xl mx-auto w-full overflow-x-hidden px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 mt-4 sm:mt-8 md:mt-12 relative" data-aos="fade-up">
-            {/* Decorative Background Elements */}
+          <div className="text-center mb-8 sm:mb-12 mt-4 sm:mt-8 md:mt-12 relative">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary-200/20 rounded-full blur-3xl"></div>
               <div className="absolute top-0 right-1/4 w-24 h-24 bg-yellow-200/20 rounded-full blur-2xl"></div>
               <div className="absolute top-0 left-1/4 w-20 h-20 bg-blue-200/20 rounded-full blur-xl"></div>
             </div>
             
-            {/* Decorative Top Line */}
             <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
               <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent via-primary-400 to-primary-500"></div>
               <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
@@ -299,7 +197,6 @@ function Donate() {
               Your contribution helps us feed, educate, and empower communities in need.
             </p>
             
-            {/* Decorative Bottom Line */}
             <div className="flex items-center justify-center gap-2 mt-4 sm:mt-6">
               <div className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-yellow-500"></div>
               <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
@@ -307,8 +204,7 @@ function Donate() {
             </div>
           </div>
 
-          {/* Donation Type Tabs */}
-          <div className="mb-8 w-full" data-aos="fade-up" data-aos-delay="100">
+          <div className="mb-8 w-full">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 mb-6 w-full" role="tablist" aria-label="Donation type selection">
               {DONATION_TABS.map(tab => (
                 <button
@@ -334,10 +230,8 @@ function Donate() {
           </div>
 
           <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 w-full max-w-full overflow-x-hidden">
-            {/* Top Section - Donation Amount */}
-            <div className="w-full max-w-full overflow-x-hidden" data-aos="fade-up">
+            <div className="w-full max-w-full overflow-x-hidden">
               <div className="bg-gradient-to-br from-white via-primary-50/30 to-white rounded-2xl shadow-xl border-2 border-primary-100/50 p-4 sm:p-5 md:p-6 mb-6 w-full max-w-full overflow-x-hidden relative">
-                {/* Decorative Background Elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-2xl">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary-200/10 rounded-full blur-3xl"></div>
                   <div className="absolute bottom-0 left-0 w-24 h-24 bg-yellow-200/10 rounded-full blur-2xl"></div>
@@ -353,7 +247,6 @@ function Donate() {
                     </h3>
                   </div>
                   
-                  {/* Preset Amounts */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 md:gap-3 mb-5" role="group" aria-label="Preset donation amounts">
                     {PRESET_AMOUNTS.map((preset, index) => (
                       <button
@@ -377,7 +270,6 @@ function Donate() {
                     ))}
                   </div>
 
-                  {/* Custom Amount */}
                   <div className="mb-5 w-full">
                     <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                       Or Enter Custom Amount
@@ -391,11 +283,9 @@ function Donate() {
                           pattern="[0-9]*"
                           value={customAmount}
                           onChange={(e) => {
-                            // Only allow numbers
                             const value = e.target.value.replace(/[^0-9]/g, '')
                             setCustomAmount(value)
                             setDonationAmount('')
-                            // Clear amount error when user types
                             if (errors.amount) {
                               setErrors(prev => {
                                 const newErrors = { ...prev }
@@ -417,10 +307,8 @@ function Donate() {
                     </div>
                   </div>
 
-                  {/* Current Selection */}
                   {(donationAmount || customAmount) && (
                     <div className="bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 border-2 border-primary-400 rounded-lg p-3 sm:p-4 mb-5 shadow-lg w-full relative overflow-hidden">
-                      {/* Animated Background */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 animate-shimmer"></div>
                       <div className="flex items-center gap-2 relative z-10">
                         <svg className="w-4 h-4 sm:w-4 sm:h-4 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -436,7 +324,6 @@ function Donate() {
               </div>
             </div>
 
-                {/* Donation Type Specific Content */}
                 {activeTab === 'honor' && (
                   <div className="mb-6 p-4 sm:p-5 md:p-6 bg-blue-50 rounded-xl border-2 border-blue-200">
                     <h4 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Donate in Honor</h4>
@@ -686,8 +573,7 @@ function Donate() {
                   </div>
                 )}
 
-            {/* Bottom Section - Donor Information Form */}
-            <div className="w-full max-w-full overflow-x-hidden" data-aos="fade-up" data-aos-delay="200">
+            <div className="w-full max-w-full overflow-x-hidden">
               <div className="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-5 md:p-6 lg:p-8 w-full max-w-full overflow-x-hidden">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-200">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-accent-gradient rounded-lg flex items-center justify-center flex-shrink-0">
@@ -699,7 +585,6 @@ function Donate() {
                 </div>
                 
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
-                  {/* Title and Name */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
@@ -736,7 +621,6 @@ function Donate() {
                     </div>
                   </div>
 
-                  {/* Email and Date of Birth */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
@@ -768,7 +652,6 @@ function Donate() {
                     </div>
                   </div>
 
-                  {/* Mobile and Alternate Mobile */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
@@ -800,7 +683,6 @@ function Donate() {
                     </div>
                   </div>
 
-                  {/* WhatsApp */}
                   <div className="bg-blue-50 p-3 sm:p-4 rounded-xl border border-blue-100 w-full">
                     <label className="flex items-start cursor-pointer">
                       <input
@@ -821,7 +703,6 @@ function Donate() {
                     )}
                   </div>
 
-                  {/* PAN Number */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                       PAN Number <span className="text-gray-400 font-normal text-xs">(Optional)</span>
@@ -837,7 +718,6 @@ function Donate() {
                     />
                   </div>
 
-                  {/* Address */}
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                       Address <span className="text-red-500">*</span>
@@ -855,7 +735,6 @@ function Donate() {
                     {errors.address && <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.address}</p>}
                   </div>
 
-                  {/* Pin Code and City */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
@@ -892,7 +771,6 @@ function Donate() {
                     </div>
                   </div>
 
-                  {/* State and Preference State */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
@@ -928,7 +806,6 @@ function Donate() {
                     </div>
                   </div>
 
-                  {/* Terms and Conditions */}
                   <div className="pt-2 bg-gray-50 p-3 sm:p-4 rounded-xl border border-gray-200 w-full">
                     <label className="flex items-start cursor-pointer">
                       <input
@@ -942,14 +819,12 @@ function Donate() {
                     </label>
                   </div>
 
-                  {/* Donation Amount Error */}
                   {errors.amount && (
                     <div className="p-3 sm:p-4 bg-red-50 border border-red-200 rounded-xl">
                       <p className="text-xs sm:text-sm text-red-600">{errors.amount}</p>
                     </div>
                   )}
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting || (!donationAmount && !customAmount)}
@@ -975,7 +850,6 @@ function Donate() {
                     </span>
                   </button>
 
-                  {/* Tax Exemption Info */}
                   <div className="text-center pt-4">
                     <div className="inline-flex items-center gap-2 bg-primary-50 px-4 py-2 rounded-lg border border-primary-200">
                       <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -991,8 +865,7 @@ function Donate() {
             </div>
           </div>
 
-          {/* Additional Information */}
-          <div className="mt-8 sm:mt-12 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 w-full" data-aos="fade-up">
+          <div className="mt-8 sm:mt-12 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 w-full">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 break-words">Other Ways to Donate</h3>
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Bank Transfer / Cheque / DD</h4>

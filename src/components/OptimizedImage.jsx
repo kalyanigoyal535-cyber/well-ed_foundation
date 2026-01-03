@@ -1,8 +1,5 @@
 import { useState } from 'react'
 
-/**
- * Optimized Image Component with lazy loading, error handling, and performance optimizations
- */
 function OptimizedImage({ 
   src, 
   alt, 
@@ -47,5 +44,3 @@ function OptimizedImage({
 }
 
 export default OptimizedImage
-
-
