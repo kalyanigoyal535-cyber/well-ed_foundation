@@ -429,7 +429,7 @@ function Home() {
                   At Well-Ed Foundation, wellness is inclusive and compassionate.
                 </p>
                 <p className="text-xs sm:text-sm leading-relaxed opacity-95">
-                  We are committed to walking alongside individuals and communities � listening, learning, and supporting them � because wellness should never be selective, and no one should feel alone on their journey to better health.
+                  We are committed to walking alongside individuals and communities listening, learning, and supporting them  because wellness should never be selective, and no one should feel alone on their journey to better health.
                 </p>
               </div>
             </div>

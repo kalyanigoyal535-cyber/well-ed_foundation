@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html, body {
+    font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -10,7 +16,6 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
-  font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 #root {
