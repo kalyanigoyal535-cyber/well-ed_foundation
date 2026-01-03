@@ -149,13 +149,35 @@ function Donate() {
     setIsSubmitting(true)
     
     try {
-      // Form is valid, proceed with submission
-      // In a production environment, you would redirect to a payment gateway here
-      alert('Thank you for your donation! You will be redirected to the payment gateway.')
+      const amount = parseInt(donationAmount || customAmount)
+
+      // 1️⃣ Call YOUR backend
+      const res = await fetch("/api/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount,
+          donorName: formData.name,
+          donorEmail: formData.email,
+          donorPhone: formData.mobile,
+        }),
+      })
+  
+      const data = await res.json()
+  
+      // 2️⃣ Open Cashfree Checkout
+      const cashfree = new window.Cashfree({
+        mode: "sandbox", // change to "production" later
+      })
+  
+      cashfree.checkout({
+        paymentSessionId: data.payment_session_id,
+        redirectTarget: "_modal",
+      })
       
     } catch (error) {
-      console.error('Error submitting donation:', error)
-      alert('An error occurred while submitting your donation. Please try again or contact support.')
+      console.error(error)
+      alert("Payment initiation failed. Please try again.")
     } finally {
       setIsSubmitting(false)
     }

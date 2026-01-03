@@ -4,8 +4,17 @@ const Home = React.lazy(() => import('./pages/Home'))
 const Donate = React.lazy(() => import('./pages/Donate'))
 const Funds = React.lazy(() => import('./pages/Funds'))
 import ErrorBoundary from './components/ErrorBoundary'
+import { useEffect } from "react";
+
+
 
 function App() {
+  useEffect(() => {
+    fetch("http://localhost:5000")
+      .then(res => res.text())
+      .then(data => console.log(data));
+  }, []);
+  
 
   return (
     <ErrorBoundary>
