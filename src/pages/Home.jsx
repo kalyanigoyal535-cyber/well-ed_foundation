@@ -574,7 +574,30 @@ function Home() {
             <div className="hidden lg:flex absolute left-4 top-0 bottom-0 w-48 items-center justify-center pointer-events-none z-0">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 via-blue-100/40 to-cyan-100/50 rounded-3xl blur-2xl"></div>
-                <div className="relative text-8xl opacity-25">??</div>
+                <div className="relative opacity-50">
+                  <svg width="100" height="120" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Pastel Green Book - Back */}
+                    <path d="M8 25L8 70C8 72 9 73 11 73L35 73C37 73 38 72 38 70L38 25C38 23 37 22 35 22L11 22C9 22 8 23 8 25Z" fill="#86EFAC"/>
+                    <path d="M10 27L10 68L33 68L33 27L10 27Z" fill="#A7F3D0"/>
+                    <line x1="14" y1="35" x2="29" y2="35" stroke="#6EE7B7" strokeWidth="0.8"/>
+                    <line x1="14" y1="42" x2="29" y2="42" stroke="#6EE7B7" strokeWidth="0.8"/>
+                    <line x1="14" y1="49" x2="29" y2="49" stroke="#6EE7B7" strokeWidth="0.8"/>
+                    
+                    {/* Pastel Pink Book - Middle */}
+                    <path d="M22 32L22 77C22 79 23 80 25 80L49 80C51 80 52 79 52 77L52 32C52 30 51 29 49 29L25 29C23 29 22 30 22 32Z" fill="#F9A8D4"/>
+                    <path d="M24 34L24 75L47 75L47 34L24 34Z" fill="#FBCFE8"/>
+                    <line x1="28" y1="42" x2="43" y2="42" stroke="#F5A3D1" strokeWidth="0.8"/>
+                    <line x1="28" y1="49" x2="43" y2="49" stroke="#F5A3D1" strokeWidth="0.8"/>
+                    <line x1="28" y1="56" x2="43" y2="56" stroke="#F5A3D1" strokeWidth="0.8"/>
+                    
+                    {/* Pastel Light Blue Book - Front */}
+                    <path d="M36 39L36 84C36 86 37 87 39 87L63 87C65 87 66 86 66 84L66 39C66 37 65 36 63 36L39 36C37 36 36 37 36 39Z" fill="#BAE6FD"/>
+                    <path d="M38 41L38 82L61 82L61 41L38 41Z" fill="#DBEAFE"/>
+                    <line x1="42" y1="49" x2="57" y2="49" stroke="#93C5FD" strokeWidth="0.8"/>
+                    <line x1="42" y1="56" x2="57" y2="56" stroke="#93C5FD" strokeWidth="0.8"/>
+                    <line x1="42" y1="63" x2="57" y2="63" stroke="#93C5FD" strokeWidth="0.8"/>
+                  </svg>
+                </div>
                 <div className="absolute top-10 left-10 w-24 h-24 bg-indigo-200/30 rounded-full blur-xl"></div>
                 <div className="absolute bottom-10 right-10 w-20 h-20 bg-cyan-200/30 rounded-full blur-xl"></div>
               </div>
@@ -583,7 +606,20 @@ function Home() {
             <div className="hidden lg:flex absolute right-4 top-0 bottom-0 w-48 items-center justify-center pointer-events-none z-0">
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-100/50 via-purple-100/40 to-rose-100/50 rounded-3xl blur-2xl"></div>
-                <div className="relative text-8xl opacity-25">??</div>
+                <div className="relative opacity-50">
+                  <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Stylized Yellow Lightbulb */}
+                    <path d="M40 5C28.95 5 20 13.95 20 25C20 33.28 23.89 40.5 30 44.5V58C30 59.66 31.34 61 33 61H47C48.66 61 50 59.66 50 58V44.5C56.11 40.5 60 33.28 60 25C60 13.95 51.05 5 40 5Z" fill="#FCD34D"/>
+                    <path d="M40 9C31.16 9 24 16.16 24 25C24 32.18 27.47 38.5 32.5 42V57C32.5 58.05 33.45 59 34.5 59H45.5C46.55 59 47.5 58.05 47.5 57V42C52.53 38.5 56 32.18 56 25C56 16.16 48.84 9 40 9Z" fill="#FDE047"/>
+                    {/* Filament */}
+                    <circle cx="40" cy="32" r="1.5" fill="#78350F"/>
+                    <path d="M38 36L42 36" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round"/>
+                    {/* Base */}
+                    <rect x="35" y="58" width="10" height="6" rx="1" fill="#F59E0B"/>
+                    <rect x="36.5" y="64" width="7" height="5" rx="0.8" fill="#D97706"/>
+                    <rect x="38" y="69" width="4" height="3" rx="0.5" fill="#78350F"/>
+                  </svg>
+                </div>
                 <div className="absolute top-10 right-10 w-24 h-24 bg-violet-200/30 rounded-full blur-xl"></div>
                 <div className="absolute bottom-10 left-10 w-20 h-20 bg-rose-200/30 rounded-full blur-xl"></div>
               </div>
