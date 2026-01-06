@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 function App() {
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("http://localhost:3000")
       .then(res => res.text())
       .then(data => console.log(data));
   }, []);
