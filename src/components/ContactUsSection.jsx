@@ -19,8 +19,7 @@ const ContactUsSection = () => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-  };
-  const handleSubmit = async (e) => {
+  };const handleSubmit = async (e) => {
     e.preventDefault();
   
     const payload = {
@@ -42,12 +41,29 @@ const ContactUsSection = () => {
         body: JSON.stringify(payload),
       });
   
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+  
       const data = await response.json();
       console.log("Server response:", data);
+  
+      // ✅ RESET FORM AFTER SUCCESS
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        organization: "",
+        inquiryType: "",
+        message: "",
+        newsletter: false,
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
+  
 
   return (
     <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-5 md:p-5 lg:p-6 border border-gray-200">
